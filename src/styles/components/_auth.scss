@@ -1,0 +1,38 @@
+@use "../base/mixins" as m;
+
+.auth {
+  align-items: center;
+  background-image: url(../../../public/assets/auth/background.png);
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  height: 100vh;
+  justify-items: center;
+  position: relative;
+
+  @include m.phone {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.auth__img img {
+  display: none;
+
+  @include m.phone {
+    display: block;
+    width: 85%;
+    margin-left: 4rem;
+  }
+}
+
+.back__home {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  left: 1rem;
+  position: absolute;
+  top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}

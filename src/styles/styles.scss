@@ -1,0 +1,16 @@
+// Base
+@import "./base/normalize";
+@import "./base/variables";
+@import "./base/mixins";
+@import "./base/globales";
+
+// Components
+@import "./components/auth";
+@import "./components/veterinary";
+@import "./components/services";
+
+// UI
+@import "./ui/form";
+@import "./ui/navbar";
+@import "./ui/hero";
+@import "./ui/footer";
