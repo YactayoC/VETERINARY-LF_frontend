@@ -5,7 +5,7 @@ import { startLogout } from '../../actions/auth';
 
 export const Aside = () => {
   const dispatch = useDispatch();
-  const { fullname } = useSelector((state) => state.auth);
+  const { fullname } = useSelector((state) => state.info.user);
   const width = document.documentElement.scrollWidth;
 
   useEffect(() => {

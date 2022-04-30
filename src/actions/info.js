@@ -1,6 +1,8 @@
 import { fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
+import Swal from 'sweetalert2';
 
+// Load info
 export const infoStartLoading = () => {
   return async (dispatch) => {
     try {
@@ -18,6 +20,32 @@ const infoLoaded = (data) => ({
   payload: data,
 });
 
+// Update info
+export const infoStartUpdate = (valuesForm) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken(`auth/profile`, valuesForm, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(infoUpdated(valuesForm));
+        dispatch(infoStartLoading());
+        Swal.fire('Success', body.msg, 'success');
+      } else {
+        Swal.fire('Error', body.msg, 'error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const infoUpdated = (valuesForm) => ({
+  type: types.infoUpdated,
+  payload: valuesForm,
+});
+
+// Logout
 export const infoLogout = () => ({
   type: types.infoLogout,
 });

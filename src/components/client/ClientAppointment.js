@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 import { appointmentStartLoading, eventStartAddNew } from '../../actions/appointment';
 import { useForm } from '../../hooks/useForm';
 import { Aside } from '../ui/Aside';
 import { Data } from '../ui/Data';
 import { Item } from '../ui/Item';
 import { isEmpty } from 'validator';
+
+import Swal from 'sweetalert2';
 
 const initialState = {
   mascot: '',
@@ -20,6 +21,11 @@ export const ClientAppointment = () => {
   const [formValues, handleInputChange, reset] = useForm(initialState);
   const { mascot, date, symptom } = formValues;
 
+  // const handleOpenModal = () => {
+  //   const modal = document.querySelector('.modal');
+  //   modal.classList.remove('modal__hide');
+  // };
+
   const handleCloseModal = () => {
     const modal = document.querySelector('.modal');
     modal.classList.add('modal__hide');
@@ -29,7 +35,7 @@ export const ClientAppointment = () => {
     dispatch(appointmentStartLoading());
   }, [dispatch]);
 
-  const handleAddAppointment = (e) => {
+  const handleAdd = (e) => {
     e.preventDefault();
 
     if (isFormValid()) {
@@ -86,7 +92,7 @@ export const ClientAppointment = () => {
             <h2>Add Appointment</h2>
             <i className="fa-solid fa-rectangle-xmark" onClick={handleCloseModal}></i>
           </div>
-          <form className="form animate__animated animate__fadeIn" onSubmit={handleAddAppointment}>
+          <form className="form animate__animated animate__fadeIn" onSubmit={handleAdd}>
             <div className="form__group form__add">
               <input
                 className="form__input"

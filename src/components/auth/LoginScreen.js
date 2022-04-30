@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { isEmail } from 'validator';
 import { startLogin } from '../../actions/auth';
+
 import Swal from 'sweetalert2';
 
 const initialState = {
@@ -21,6 +22,16 @@ export const LoginScreen = () => {
 
     if (isFormValid() === true) {
       dispatch(startLogin(email, password));
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1000,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
     }
   };
 

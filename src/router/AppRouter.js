@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startChecking } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { DashboardPrivate } from './DashboardPrivate';
+import { Loading } from '../components/ui/Loading';
+import { infoStartUpdate } from '../actions/info';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -22,12 +24,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checking && !data) {
-    return (
-      <div className="loading">
-        <img className="loading-img" src="../assets/auth/loading.gif" alt="loading" />{' '}
-        <p className="loading-text">Loading . . .</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

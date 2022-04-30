@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Aside } from '../ui/Aside';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
+import { Loading } from '../ui/Loading';
+import { infoStartUpdate } from '../../actions/info';
+
+const initialState = {
+  fullname: '',
+  phone: '',
+  email: '',
+  addres: '',
+  password: '',
+};
 
 export const ClientSetting = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.info);
-  const { auth } = useSelector((state) => state);
+  const { uid } = useSelector((state) => state.auth);
+  const [formValues, handleInputChange, setImperativeValues] = useForm(initialState);
+  const { fullname, phone, address, email, password } = formValues;
 
-  const [formValues, setFormValues] = useState(user);
-  const { fullname, phone, address, email, password } = user;
+  useEffect(() => {
+    if (!user) return;
+    setImperativeValues(user);
+  }, [user]);
 
-  const handleInputChange = ({ target }) => {
-    setFormValues({
-      ...formValues,
-      [target.name]: target.value,
-    });
+  if (!user) {
+    return <Loading />;
+  }
+
+  const { fullname: fullnameUser } = user;
+  const handleUpdateClient = (e) => {
+    e.preventDefault();
+    dispatch(infoStartUpdate(formValues));
   };
 
   return (
@@ -25,7 +44,7 @@ export const ClientSetting = () => {
             <i className="fa-solid fa-gear"></i>
             <h3>Profile</h3>
           </div>
-          <button>
+          <button data-id={uid} onClick={handleUpdateClient}>
             <i className="fa-solid fa-pen-clip"></i>
             <p>Update Data</p>
           </button>
@@ -34,7 +53,7 @@ export const ClientSetting = () => {
         <div className="profile-data__table">
           <div className="profile-data__img">
             <img src="../assets/ui/profile.webp" alt="profile" />
-            <h3>{auth.fullname}</h3>
+            <h3>{fullnameUser}</h3>
           </div>
           <div className="profile-data__form">
             <form className="form-profile animate__animated animate__fadeIn">
@@ -45,7 +64,7 @@ export const ClientSetting = () => {
                   placeholder="Fullame"
                   name="fullname"
                   autoComplete="off"
-                  value={fullname}
+                  defaultValue={fullname}
                   onChange={handleInputChange}
                 />
               </div>
@@ -56,7 +75,7 @@ export const ClientSetting = () => {
                   placeholder="Phone"
                   name="phone"
                   autoComplete="off"
-                  value={phone}
+                  defaultValue={phone}
                   onChange={handleInputChange}
                 />
               </div>
@@ -67,7 +86,7 @@ export const ClientSetting = () => {
                   placeholder="Address"
                   name="address"
                   autoComplete="off"
-                  value={address}
+                  defaultValue={address}
                   onChange={handleInputChange}
                 />
               </div>
@@ -79,7 +98,7 @@ export const ClientSetting = () => {
                   name="email"
                   autoComplete="off"
                   disabled
-                  value={email}
+                  defaultValue={email}
                   onChange={handleInputChange}
                 />
               </div>
@@ -91,7 +110,7 @@ export const ClientSetting = () => {
                   name="password"
                   autoComplete="off"
                   disabled
-                  value={password}
+                  defaultValue={password}
                   onChange={handleInputChange}
                 />
               </div>

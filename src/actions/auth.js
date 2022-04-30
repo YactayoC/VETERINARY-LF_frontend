@@ -1,8 +1,8 @@
-import Swal from 'sweetalert2';
 import { fetchNotToken, fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
 import { appointmentLogout } from './appointment';
 import { infoLogout, infoStartLoading } from './info';
+import Swal from 'sweetalert2';
 
 export const startRegister = (fullname, phone, address, email, password) => {
   return async (dispatch) => {

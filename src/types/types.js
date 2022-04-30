@@ -6,6 +6,7 @@ export const types = {
   authLogout: '[auth] logout',
 
   infoLoaded: '[info] Loaded',
+  infoUpdated: '[info] Updated',
   infoLogout: '[info] Logout',
 
   appointmentStartAddNew: '[appointment] Start Add New',

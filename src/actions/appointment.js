@@ -1,8 +1,8 @@
 import Swal from 'sweetalert2';
 import { fetchToken } from '../helpers/fetch';
-import { prepareAppointments } from '../helpers/prepareAppointments';
 import { types } from '../types/types';
 
+// Add new appointment
 export const eventStartAddNew = (appointment) => {
   return async (dispatch, getState) => {
     const { uid, fullname } = getState().auth;
@@ -29,6 +29,30 @@ const appointmentAddNew = (appointment) => ({
   payload: appointment,
 });
 
+// Update Appointment
+export const appointmentStartUpdate = (appointment) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken(`appointment/updateAppointment/${appointment._id}`, appointment, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(appointmentUpdated(appointment));
+      } else {
+        Swal.fire('Error', body.msg, 'error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const appointmentUpdated = (appointment) => ({
+  type: types.appointmentUpdated,
+  payload: appointment,
+});
+
+// Delete Appointment
 export const appointmentStartDeleted = (id) => {
   return async (dispatch) => {
     try {
@@ -52,13 +76,13 @@ const appointmentDeleted = (id) => ({
   payload: id,
 });
 
+// Loaded Appointments
 export const appointmentStartLoading = () => {
   return async (dispatch) => {
     try {
       const resp = await fetchToken('appointment/getAppointments');
       const body = await resp.json();
       const appointments = body.appointments;
-      //const appointments = prepareAppointments(body.appointments);
       dispatch(appointmentsLoaded(appointments));
     } catch (error) {
       console.log(error);
@@ -71,6 +95,7 @@ const appointmentsLoaded = (appointments) => ({
   payload: appointments,
 });
 
+// Clear Appointments
 export const appointmentLogout = () => ({
   type: types.appointmentLogout,
 });
