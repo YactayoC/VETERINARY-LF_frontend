@@ -1,0 +1,288 @@
+// General
+@use '../base/mixins' as m;
+
+.data {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+
+  @include m.phone {
+    align-items: flex-start;
+    margin-left: 5rem;
+  }
+}
+
+.data__general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  @include m.phone {
+    flex-direction: row;
+    justify-content: space-between;
+    width: max-content;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & i {
+      font-size: 1.1rem;
+    }
+  }
+
+  & button {
+    background-color: $primary;
+    border: none;
+    color: $white;
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 700;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    cursor: pointer;
+    transition: background-color 0.5s linear;
+
+    & p {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}
+
+// Appointment
+
+.appointment {
+  background-image: url(../../../public/assets/auth/background.png);
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+.appoitment-data__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 14rem;
+  max-height: 20rem;
+  overflow: auto;
+  flex-wrap: wrap;
+
+  @include m.phone {
+    width: 55rem;
+    max-width: 55rem;
+  }
+}
+
+.appointment-data__info p {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.appointment-data__datas {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-data__datas-data,
+.appointment-data__datas-header {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  gap: 3rem;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @include m.phone {
+    grid-template-columns: repeat(5, 125px);
+    gap: 3rem;
+  }
+}
+
+.appointment-data__datas-element {
+  text-align: center;
+}
+
+.appointment-data__datas-header {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.element-edit,
+.element-remove {
+  cursor: unset;
+}
+
+.element-edit {
+  color: rgb(31, 142, 245);
+  font-size: 1.1rem;
+}
+
+.element-remove {
+  color: red;
+  font-size: 1.4rem;
+}
+
+// Testimonial
+.testimonial-data__datas-data,
+.testimonial-data__datas-header {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  gap: 8rem;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.testimonial-data__datas-header {
+  font-weight: 700;
+}
+
+// Profile - Settings
+.profile-data {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+
+  @include m.phone {
+    align-items: flex-start;
+    margin-left: 5rem;
+  }
+}
+
+.profile-data__general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  @include m.phone {
+    flex-direction: row;
+    justify-content: space-between;
+    width: max-content;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & i {
+      font-size: 1.1rem;
+    }
+  }
+
+  & button {
+    background-color: $primary;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 700;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    transition: background-color 0.3s ease;
+
+    & p {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}
+
+.profile-data__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 14rem;
+  max-height: 30rem;
+  overflow: auto;
+
+  @include m.phone {
+    width: 50rem;
+    max-width: 50rem;
+    overflow: unset;
+  }
+}
+
+.profile-data__img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & img {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+}
+
+.form-profile {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 2rem;
+
+  @include m.phone {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form__profile {
+  width: 100% !important;
+  @include m.phone {
+    width: 100% !important;
+  }
+}
+
+.profile-data__form {
+  @include m.phone {
+    width: 100%;
+  }
+}
+
+// results
+.no-results {
+  margin: 0 auto;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  font-weight: 700;
+}

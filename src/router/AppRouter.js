@@ -1,21 +1,59 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { LoginScreen } from "../components/auth/LoginScreen";
-import { RegisterScreen } from "../components/auth/RegisterScreen";
-import { ContactScreen } from "../components/veterinary/ContactScreen";
-import { MainScreen } from "../components/veterinary/MainScreen";
-import { ServiceScreen } from "../components/veterinary/ServiceScreen";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import { ContactScreen } from '../components/veterinary/ContactScreen';
+import { MainScreen } from '../components/veterinary/MainScreen';
+import { ServiceScreen } from '../components/veterinary/ServiceScreen';
+import { DashboardPublic } from './DashboardPublic';
+import { PublicRoute } from './PublicRoute';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { startChecking } from '../actions/auth';
+import { PrivateRoute } from './PrivateRoute';
+import { DashboardPrivate } from './DashboardPrivate';
 
 export const AppRouter = () => {
+  const dispatch = useDispatch();
+  const { checking, uid } = useSelector((state) => state.auth);
+  const { data } = useSelector((state) => state.info);
+
+  useEffect(() => {
+    dispatch(startChecking());
+  }, [dispatch]);
+
+  if (checking && !data) {
+    return (
+      <div className="loading">
+        <img className="loading-img" src="../assets/auth/loading.gif" alt="loading" />{' '}
+        <p className="loading-text">Loading . . .</p>
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/auth/login" element={<LoginScreen />} />
-        <Route path="/auth/register" element={<RegisterScreen />} />
-
         <Route path="/" element={<MainScreen />} />
         <Route path="/services" element={<ServiceScreen />} />
         <Route path="/contact" element={<ContactScreen />} />
+
+        <Route
+          path="/auth/*"
+          element={
+            <PublicRoute isAuthenticated={!!uid}>
+              <DashboardPublic />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/profile/*"
+          element={
+            <PrivateRoute isAuthenticated={!!uid}>
+              <DashboardPrivate />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>

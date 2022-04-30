@@ -1,7 +1,7 @@
-import React from "react";
-import { Footer } from "../ui/Footer";
-import { Hero } from "../ui/Hero";
-import { NavBar } from "../ui/NavBar";
+import React from 'react';
+import { Footer } from '../ui/Footer';
+import { Hero } from '../ui/Hero';
+import { NavBar } from '../ui/NavBar';
 
 export const MainScreen = () => {
   return (
@@ -17,17 +17,13 @@ export const MainScreen = () => {
         <div className="about__welcome">
           <h2 className="about__welcome-title">Welcome to LoalyFriend</h2>
           <p className="about__welcome-text">
-            Lorem ipsum dolor sit amet dolor elit eos takimata dolores facilisis
-            ea esse enim ad sit magna. Ipsum euismod at lorem sadipscing ea stet
-            dolor et. No mazim sed takimata minim molestie sit sanctus zzril
-            rebum erat odio lorem sed. Invidunt congue accusam molestie amet at
-            nulla justo ipsum eu nonumy diam sed volutpat dolore accusam.
-            Invidunt dolore no ea nisl molestie odio ut rebum eirmod amet duo
-            vel labore.
+            Lorem ipsum dolor sit amet dolor elit eos takimata dolores facilisis ea esse enim ad sit magna. Ipsum
+            euismod at lorem sadipscing ea stet dolor et. No mazim sed takimata minim molestie sit sanctus zzril rebum
+            erat odio lorem sed. Invidunt congue accusam molestie amet at nulla justo ipsum eu nonumy diam sed volutpat
+            dolore accusam. Invidunt dolore no ea nisl molestie odio ut rebum eirmod amet duo vel labore.
           </p>
           <p className="about__welcome-hours">
-            In addition, we serve Saturdays and Sundays <br /> from 10:00 a.m.
-            to 8:00 p.m. horas.
+            In addition, we serve Saturdays and Sundays <br /> from 10:00 a.m. to 8:00 p.m. horas.
             <br /> ¡Because the health of your pet does not understand holidays!
           </p>
         </div>
@@ -94,22 +90,20 @@ export const MainScreen = () => {
       <section className="delivery animate__animated animate__fadeIn">
         <h2>¿Why do we delivery?</h2>
         <p>
-          Because at Autovet we think that neither you nor your pets deserve the
-          long and uncomfortable waits of traditional clinics. You will save
-          time and comfort! In addition, you will avoid the risk of contagion of
-          infectious diseases, especially if your pet is in its first months of
-          life or is sick, that is, with low defenses.
+          Because at Autovet we think that neither you nor your pets deserve the long and uncomfortable waits of
+          traditional clinics. You will save time and comfort! In addition, you will avoid the risk of contagion of
+          infectious diseases, especially if your pet is in its first months of life or is sick, that is, with low
+          defenses.
         </p>
       </section>
 
-      <section className="testimonials__grid animate__animated animate__fadeInDown">
+      <section className="testimonials__grid animate__animated animate__fadeIn">
         <div className="testimonial__card">
           <div className="testimonial__card-text">
             <i className="fa-solid fa-quote-left testimonial__quote"></i>
             <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt
-              elitr ut et labore velit duo est erat id vero eos magna lorem
-              lorem relo mrelo rmasda
+              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
+              vero eos magna lorem lorem relo mrelo rmasda
             </p>
           </div>
           <div className="testimonial__card-author">
@@ -122,9 +116,8 @@ export const MainScreen = () => {
           <div className="testimonial__card-text">
             <i className="fa-solid fa-quote-left testimonial__quote"></i>
             <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt
-              elitr ut et labore velit duo est erat id vero eos magna lorem
-              lorem relo mrelo rmasda
+              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
+              vero eos magna lorem lorem relo mrelo rmasda
             </p>
           </div>
           <div className="testimonial__card-author">
@@ -137,9 +130,8 @@ export const MainScreen = () => {
           <div className="testimonial__card-text">
             <i className="fa-solid fa-quote-left testimonial__quote"></i>
             <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt
-              elitr ut et labore velit duo est erat id vero eos magna lorem
-              lorem relo mrelo rmasda
+              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
+              vero eos magna lorem lorem relo mrelo rmasda
             </p>
           </div>
           <div className="testimonial__card-author">
@@ -152,9 +144,8 @@ export const MainScreen = () => {
           <div className="testimonial__card-text">
             <i className="fa-solid fa-quote-left testimonial__quote"></i>
             <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt
-              elitr ut et labore velit duo est erat id vero eos magna lorem
-              lorem relo mrelo rmasda
+              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
+              vero eos magna lorem lorem relo mrelo rmasda
             </p>
           </div>
           <div className="testimonial__card-author">

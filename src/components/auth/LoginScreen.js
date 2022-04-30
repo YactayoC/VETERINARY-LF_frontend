@@ -1,21 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
+import { isEmail } from 'validator';
+import { startLogin } from '../../actions/auth';
+import Swal from 'sweetalert2';
+
+const initialState = {
+  email: '',
+  password: '',
+};
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const [formValues, handleInputChange] = useForm(initialState);
+  const { email, password } = formValues;
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isFormValid() === true) {
+      dispatch(startLogin(email, password));
+    }
+  };
+
+  const isFormValid = () => {
+    if (!isEmail(email)) {
+      Swal.fire('Error', 'The email is not valid', 'error');
+      return false;
+    } else if (password.length === 0) {
+      Swal.fire('Error', 'The password is not valid', 'error');
+      return false;
+    }
+
+    return true;
   };
 
   return (
-    <div className="auth">
-      <div className="auth__img">
+    <div className="auth ">
+      <div className="auth__img animate__animated animate__fadeIn">
         <img src="../assets/auth/cat.png" alt="cat" />
         <Link className="back__home" to="/">
           <i className="fa-solid fa-chevron-left"></i>
           <p>Home</p>
         </Link>
       </div>
-      <form className="form" onSubmit={handleSubmit}>
+
+      <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit}>
         <h2>Login in Loyal Friend</h2>
         <div className="form__group">
           <input
@@ -24,6 +55,8 @@ export const LoginScreen = () => {
             placeholder="Email"
             name="email"
             autoComplete="off"
+            value={email}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form__group">
@@ -33,6 +66,8 @@ export const LoginScreen = () => {
             placeholder="Password"
             name="password"
             autoComplete="off"
+            value={password}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form__submit">

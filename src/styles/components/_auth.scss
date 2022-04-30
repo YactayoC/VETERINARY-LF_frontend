@@ -1,9 +1,10 @@
-@use "../base/mixins" as m;
+@use '../base/mixins' as m;
 
 .auth {
   align-items: center;
   background-image: url(../../../public/assets/auth/background.png);
   background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   height: 100vh;
@@ -35,4 +36,29 @@
   top: 1.5rem;
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+.loading {
+  align-items: center;
+  background-image: url(../../../public/assets/ui/background.jpg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.loading-img {
+  width: 40rem;
+}
+
+.loading-text {
+  color: $white;
+  letter-spacing: 5px;
+  font-size: 3rem;
+  font-weight: 700;
+
+  @include m.phone {
+    font-size: 4rem;
+    letter-spacing: 10px;
+  }
 }

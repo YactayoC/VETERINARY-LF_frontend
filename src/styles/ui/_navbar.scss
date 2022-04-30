@@ -11,16 +11,22 @@ header {
 }
 
 .nav {
+  align-items: center;
   background-color: #f6f6f6;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding-block: 1rem;
   padding-inline: 2rem;
+  height: 5rem;
+  overflow: hidden;
+  transition: all 0.5s ease;
 
   @include m.phone {
     align-items: center;
     flex-direction: row;
+    height: 7rem;
     padding-inline: 5rem;
   }
 }
@@ -78,10 +84,16 @@ header {
 .nav__link-auth {
   background-color: $black;
   transition: background-color 0.3s ease;
-  margin-left: 1.5rem;
+  width: 100%;
+  text-align: center;
 
   &:hover {
     background-color: lighten($black, 40%);
+  }
+
+  @include m.phone {
+    width: auto;
+    margin-left: 1.5rem;
   }
 }
 
@@ -121,4 +133,28 @@ header {
   @include m.phone {
     display: none;
   }
+}
+
+.nav__phone {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-block: 1rem;
+  width: 100%;
+  @include m.phone {
+    display: none;
+  }
+}
+
+.nav__link--phone {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+}
+
+.nav-active--phone {
+  height: 23rem;
 }
