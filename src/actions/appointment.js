@@ -66,7 +66,7 @@ export const appointmentStartDeleted = (id) => {
         Swal.fire('Error', body.msg, 'error');
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire('Error', 'There wan an error', 'error');
     }
   };
 };
@@ -80,12 +80,12 @@ const appointmentDeleted = (id) => ({
 export const appointmentStartLoading = () => {
   return async (dispatch) => {
     try {
-      const resp = await fetchToken('appointment/getAppointments');
+      const resp = await fetchToken('appointment/getAppointmentClient');
       const body = await resp.json();
       const appointments = body.appointments;
       dispatch(appointmentsLoaded(appointments));
     } catch (error) {
-      console.log(error);
+      Swal.fire('Error', 'There wan an error', 'error');
     }
   };
 };

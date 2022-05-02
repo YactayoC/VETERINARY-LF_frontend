@@ -21,11 +21,6 @@ export const ClientAppointment = () => {
   const [formValues, handleInputChange, reset] = useForm(initialState);
   const { mascot, date, symptom } = formValues;
 
-  // const handleOpenModal = () => {
-  //   const modal = document.querySelector('.modal');
-  //   modal.classList.remove('modal__hide');
-  // };
-
   const handleCloseModal = () => {
     const modal = document.querySelector('.modal');
     modal.classList.add('modal__hide');
@@ -69,18 +64,19 @@ export const ClientAppointment = () => {
             <ul className="appointment-data__datas-header">
               <li className="appointment-data__datas-element">Symptom</li>
               <li className="appointment-data__datas-element">Date</li>
+              <li className="appointment-data__datas-element">Mascot</li>
               <li className="appointment-data__datas-element">State</li>
               <li className="appointment-data__datas-element">Edit</li>
               <li className="appointment-data__datas-element">Remove</li>
             </ul>
-            {data ? (
+            {data && appointments.length >= 1 ? (
               <>
                 {appointments.map((appointment) => (
-                  <Item key={appointment._id} {...appointment} />
+                  <Item key={appointment._id} {...appointment} type="appointment" />
                 ))}
               </>
             ) : (
-              <p className="no-results">No se encontraron resultados</p>
+              <p className="no-results">No appointments found</p>
             )}
           </div>
         </div>

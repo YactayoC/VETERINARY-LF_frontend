@@ -12,7 +12,7 @@ import { startChecking } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { DashboardPrivate } from './DashboardPrivate';
 import { Loading } from '../components/ui/Loading';
-import { infoStartUpdate } from '../actions/info';
+import { ConfirmScreen } from '../components/veterinary/ConfirmScreen';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ export const AppRouter = () => {
         <Route path="/" element={<MainScreen />} />
         <Route path="/services" element={<ServiceScreen />} />
         <Route path="/contact" element={<ContactScreen />} />
+        <Route path="/confirm-account/:token" element={<ConfirmScreen />} />
 
         <Route
           path="/auth/*"

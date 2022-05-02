@@ -3,6 +3,7 @@ import { types } from '../types/types';
 import { appointmentLogout } from './appointment';
 import { infoLogout, infoStartLoading } from './info';
 import Swal from 'sweetalert2';
+import { testimonialStartLogout } from './testimonial';
 
 export const startRegister = (fullname, phone, address, email, password) => {
   return async (dispatch) => {
@@ -48,6 +49,7 @@ export const startLogout = () => {
     dispatch(logout());
     dispatch(infoLogout());
     dispatch(appointmentLogout());
+    dispatch(testimonialStartLogout());
   };
 };
 
@@ -68,7 +70,7 @@ export const startChecking = () => {
           fullname: body.fullname,
         }),
       );
-      dispatch(infoStartLoading());
+      dispatch(infoStartLoading()); // info
     } else {
       dispatch(checkingFinish());
     }
@@ -78,3 +80,17 @@ export const startChecking = () => {
 const checkingFinish = () => ({
   type: types.authCheckingFinish,
 });
+
+// Confirm
+export const startConfirm = (token) => {
+  return async (dispatch) => {
+    const resp = await fetchNotToken(`auth/confirm/${token}`);
+    const body = await resp.json();
+
+    if (body.ok) {
+      //Swal.fire('Success', body.msg, 'success');
+    } else {
+      Swal.fire('Error', body.msg, 'error');
+    }
+  };
+};

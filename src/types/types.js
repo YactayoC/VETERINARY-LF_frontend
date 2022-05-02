@@ -15,4 +15,11 @@ export const types = {
   appointmentDeleted: '[appointment] Deleted',
   appointmentLoaded: '[appointment] Loaded',
   appointmentLogout: '[appointment] Logout',
+
+  testimonialStartAddNew: '[testimonial] Start Add New',
+  testimonialAddNew: '[testimonial] Add New',
+  testimonialUpdated: '[testimonial] Updated',
+  testimonialDeleted: '[testimonial] Deleted',
+  testimonialLoaded: '[testimonial] Loaded',
+  testimonialLogout: '[testimonial] Logout',
 };

@@ -62,3 +62,39 @@
     letter-spacing: 10px;
   }
 }
+
+// Confirm Token
+.confirm {
+  align-items: center;
+  background-image: url(../../../public/assets/auth/background.png);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__text {
+    margin: 0;
+    font-weight: 900;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &__link {
+    background-color: #4b9af5;
+    color: $white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 2rem;
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(#4b9af5, 10%);
+    }
+  }
+}
+

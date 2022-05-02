@@ -87,8 +87,8 @@
   flex-wrap: wrap;
 
   @include m.phone {
-    width: 55rem;
-    max-width: 55rem;
+    width: 65rem;
+    max-width: 65rem;
   }
 }
 
@@ -106,7 +106,7 @@
 .appointment-data__datas-data,
 .appointment-data__datas-header {
   display: grid;
-  grid-template-columns: repeat(5, 60px);
+  grid-template-columns: repeat(6, 60px);
   gap: 3rem;
   justify-items: center;
   align-items: center;
@@ -114,7 +114,7 @@
   margin-bottom: 1rem;
 
   @include m.phone {
-    grid-template-columns: repeat(5, 125px);
+    grid-template-columns: repeat(6, 125px);
     gap: 3rem;
   }
 }
