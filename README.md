@@ -1,6 +1,6 @@
 # Veterinary-LF_backend
 
-_Veterinary project, made with nodejs, nodemailer, express and jwt._
+_Veterinary project, made with react, redux and sass._
 
 ## Starter 🚀
 
@@ -23,5 +23,5 @@ After cloning the project you need to run the next commands
 
 ```
   1️⃣ => npm install
-  2️⃣ => npm run dev
+  2️⃣ => npm start
 ```
