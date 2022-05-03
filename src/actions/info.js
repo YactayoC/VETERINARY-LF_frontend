@@ -1,6 +1,7 @@
 import { fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
+import { startChecking } from './auth';
 
 // Load info
 export const infoStartLoading = () => {
@@ -30,6 +31,7 @@ export const infoStartUpdate = (valuesForm) => {
       if (body.ok) {
         dispatch(infoUpdated(valuesForm));
         dispatch(infoStartLoading());
+        dispatch(startChecking());
         Swal.fire('Success', body.msg, 'success');
       } else {
         Swal.fire('Error', body.msg, 'error');

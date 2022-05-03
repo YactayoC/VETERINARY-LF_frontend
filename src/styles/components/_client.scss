@@ -61,6 +61,11 @@
     &:hover {
       background-color: darken($primary, 10%);
     }
+
+    &:disabled {
+      background-color: lighten($primary, 20%);
+      cursor: not-allowed;
+    }
   }
 }
 
@@ -148,8 +153,8 @@
 .testimonial-data__datas-data,
 .testimonial-data__datas-header {
   display: grid;
-  grid-template-columns: repeat(4, 60px);
-  gap: 8rem;
+  grid-template-columns: repeat(4, 180px);
+  gap: 4rem;
   justify-items: center;
   align-items: center;
   text-align: center;

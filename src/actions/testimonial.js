@@ -45,6 +45,30 @@ export const testimonialStartDeleted = (id) => {
   };
 };
 
+// Update Testimonial
+export const testimonialStartUpdate = (testimonial) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken(`testimonial/updateTestimonial/${testimonial._id}`, testimonial, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(testimonialUpdated(body.testimonial));
+        Swal.fire('Success', body.msg, 'success');
+      } else {
+        Swal.fire('Error', body.msg, 'error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const testimonialUpdated = (testimonial) => ({
+  type: types.testimonialUpdated,
+  payload: testimonial,
+});
+
 const testimonialDeleted = (id) => ({
   type: types.testimonialDeleted,
   payload: id,
@@ -72,4 +96,14 @@ const testimonialsLoaded = (testimonials) => ({
 // Testimonial Logout
 export const testimonialStartLogout = () => ({
   type: types.testimonialLogout,
+});
+
+// Active Testimonial
+export const testimonialStartActive = (testimonial) => ({
+  type: types.testimonialSetActive,
+  payload: testimonial,
+});
+
+export const testimonialClearActive = () => ({
+  type: types.testimonialClearActive,
 });

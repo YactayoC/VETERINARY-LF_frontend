@@ -70,7 +70,7 @@ export const startChecking = () => {
           fullname: body.fullname,
         }),
       );
-      dispatch(infoStartLoading()); // info
+      dispatch(infoStartLoading());
     } else {
       dispatch(checkingFinish());
     }

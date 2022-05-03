@@ -3,6 +3,7 @@ import { types } from '../types/types';
 const initialState = {
   data: false,
   testimonials: [],
+  activeTestimonial: null,
 };
 
 export const testimonialReducer = (state = initialState, action) => {
@@ -31,6 +32,24 @@ export const testimonialReducer = (state = initialState, action) => {
         ...initialState,
       };
     }
+
+    case types.testimonialSetActive:
+      return {
+        ...state,
+        activeTestimonial: action.payload,
+      };
+
+    case types.testimonialClearActive:
+      return {
+        ...state,
+        activeTestimonial: null,
+      };
+
+    case types.testimonialUpdated:
+      return {
+        ...state,
+        testimonials: state.testimonials.map((e) => (e._id === action.payload._id ? action.payload : e)),
+      };
 
     default:
       return state;

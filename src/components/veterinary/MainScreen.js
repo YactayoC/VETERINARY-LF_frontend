@@ -107,7 +107,7 @@ export const MainScreen = () => {
             </p>
           </div>
           <div className="testimonial__card-author">
-            <img src="../assets/ui/profile.webp" alt="profile" />
+            <img src="../assets/ui/user.webp" alt="profile" />
             <h3>Jhon Doe</h3>
           </div>
         </div>
@@ -121,7 +121,7 @@ export const MainScreen = () => {
             </p>
           </div>
           <div className="testimonial__card-author">
-            <img src="../assets/ui/profile.webp" alt="profile" />
+            <img src="../assets/ui/user.webp" alt="profile" />
             <h3>Jhon Doe</h3>
           </div>
         </div>
@@ -135,7 +135,7 @@ export const MainScreen = () => {
             </p>
           </div>
           <div className="testimonial__card-author">
-            <img src="../assets/ui/profile.webp" alt="profile" />
+            <img src="../assets/ui/user.webp" alt="profile" />
             <h3>Jhon Doe</h3>
           </div>
         </div>
@@ -149,7 +149,7 @@ export const MainScreen = () => {
             </p>
           </div>
           <div className="testimonial__card-author">
-            <img src="../assets/ui/profile.webp" alt="profile" />
+            <img src="../assets/ui/user.webp" alt="profile" />
             <h3>Jhon Doe</h3>
           </div>
         </div>

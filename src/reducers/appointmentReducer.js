@@ -3,6 +3,7 @@ import { types } from '../types/types';
 const initialState = {
   data: false,
   appointments: [],
+  activeAppointment: null,
 };
 
 export const appointmentReducer = (state = initialState, action) => {
@@ -29,6 +30,24 @@ export const appointmentReducer = (state = initialState, action) => {
     case types.appointmentLogout:
       return {
         ...initialState,
+      };
+
+    case types.appointmentSetActive:
+      return {
+        ...state,
+        activeAppointment: action.payload,
+      };
+
+    case types.appointmentClearActive:
+      return {
+        ...state,
+        activeAppointment: null,
+      };
+
+    case types.appointmentUpdated:
+      return {
+        ...state,
+        appointments: state.appointments.map((e) => (e._id === action.payload._id ? action.payload : e)),
       };
 
     default:

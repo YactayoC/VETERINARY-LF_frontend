@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { startRegister } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import { isEmail, isMobilePhone } from 'validator';
+
 import Swal from 'sweetalert2';
 
 const initialState = {

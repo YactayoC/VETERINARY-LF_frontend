@@ -37,7 +37,8 @@ export const appointmentStartUpdate = (appointment) => {
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(appointmentUpdated(appointment));
+        dispatch(appointmentUpdated(body.appointment));
+        Swal.fire('Success', body.msg, 'success');
       } else {
         Swal.fire('Error', body.msg, 'error');
       }
@@ -98,4 +99,14 @@ const appointmentsLoaded = (appointments) => ({
 // Clear Appointments
 export const appointmentLogout = () => ({
   type: types.appointmentLogout,
+});
+
+// Active Appointment
+export const appointmentStartActive = (appointment) => ({
+  type: types.appointmentSetActive,
+  payload: appointment,
+});
+
+export const appointmentClearActive = () => ({
+  type: types.appointmentClearActive,
 });

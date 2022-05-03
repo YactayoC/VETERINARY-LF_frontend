@@ -23,6 +23,7 @@ export const ClientSetting = () => {
   useEffect(() => {
     if (!user) return;
     setImperativeValues(user);
+    // eslint-disable-next-line
   }, [user]);
 
   if (!user) {
@@ -52,7 +53,7 @@ export const ClientSetting = () => {
 
         <div className="profile-data__table">
           <div className="profile-data__img">
-            <img src="../assets/ui/profile.webp" alt="profile" />
+            <img src="../assets/ui/user.webp" alt="profile" />
             <h3>{fullnameUser}</h3>
           </div>
           <div className="profile-data__form">

@@ -34,11 +34,11 @@ export const Aside = () => {
     <aside className="aside">
       <i className="fa-solid fa-bars aside__hamburger" onClick={handleBar}></i>
       <div className="aside__title">
-        <h2 className="aside__title-text">LoalyFriend</h2>
+        <h2 className="aside__title-text">LoyalFriend</h2>
       </div>
       <nav className="aside__nav">
         <div className="aside__profile">
-          <img src="../assets/ui/profile.webp" alt="img" />
+          <img src="../assets/ui/user.webp" alt="img" />
           <h3>{fullname}</h3>
         </div>
         <NavLink

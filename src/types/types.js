@@ -15,6 +15,8 @@ export const types = {
   appointmentDeleted: '[appointment] Deleted',
   appointmentLoaded: '[appointment] Loaded',
   appointmentLogout: '[appointment] Logout',
+  appointmentSetActive: '[appointment] Set Active',
+  appointmentClearActive: '[appointment] Clear Active',
 
   testimonialStartAddNew: '[testimonial] Start Add New',
   testimonialAddNew: '[testimonial] Add New',
@@ -22,4 +24,6 @@ export const types = {
   testimonialDeleted: '[testimonial] Deleted',
   testimonialLoaded: '[testimonial] Loaded',
   testimonialLogout: '[testimonial] Logout',
+  testimonialSetActive: '[testimonial] Set Active',
+  testimonialClearActive: '[testimonial] Clear Active',
 };
