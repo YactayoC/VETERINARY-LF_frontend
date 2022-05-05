@@ -6,8 +6,8 @@ import { RegisterScreen } from '../components/auth/RegisterScreen';
 export const DashboardPublic = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/register" element={<RegisterScreen />} />
+      <Route path="login" element={<LoginScreen />} />
+      <Route path="register" element={<RegisterScreen />} />
       <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
