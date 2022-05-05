@@ -87,7 +87,7 @@ export const NavBar = () => {
             <>
               <Link className="nav__link nav__link--phone nav__link-user" to="/profile/settings">
                 <i className="fa-solid fa-user nav__link-user--on"></i>
-                <p>Sebastian Yactayo</p>
+                <p>{fullname}</p>
               </Link>
 
               <Link className="nav__link nav__link--phone nav__link-user" to="/auth/login" onClick={handleLogout}>

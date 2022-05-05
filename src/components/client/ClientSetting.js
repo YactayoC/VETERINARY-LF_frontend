@@ -43,7 +43,7 @@ export const ClientSetting = () => {
         <div className="profile-data__general">
           <div>
             <i className="fa-solid fa-gear"></i>
-            <h3>Profile</h3>
+            <h3>Settings</h3>
           </div>
           <button data-id={uid} onClick={handleUpdateClient}>
             <i className="fa-solid fa-pen-clip"></i>

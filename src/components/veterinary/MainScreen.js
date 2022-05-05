@@ -111,11 +111,11 @@ export const MainScreen = () => {
         {testimonialsAll ? (
           <>
             {testimonialsAll.map((testimonial) => (
-              <Testimonial key={testimonial._id} {...testimonial} type="testimonial" />
+              <Testimonial key={testimonial._id} {...testimonial} />
             ))}
           </>
         ) : (
-          <p className="no-results">No testimonials found</p>
+          <p className="no-results">No testimonials</p>
         )}
       </section>
 

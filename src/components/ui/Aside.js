@@ -32,7 +32,13 @@ export const Aside = () => {
 
   return (
     <aside className="aside">
-      <i className="fa-solid fa-bars aside__hamburger" onClick={handleBar}></i>
+      <div className="aside__icons">
+        <i className="fa-solid fa-bars aside__hamburger" onClick={handleBar}></i>
+        <NavLink to="/">
+          <i className="fa-solid fa-house aside__hamburger aside__hamburger-home"></i>
+        </NavLink>
+      </div>
+
       <div className="aside__title">
         <h2 className="aside__title-text">LoyalFriend</h2>
       </div>
