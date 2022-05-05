@@ -23,6 +23,7 @@ export const types = {
   testimonialUpdated: '[testimonial] Updated',
   testimonialDeleted: '[testimonial] Deleted',
   testimonialLoaded: '[testimonial] Loaded',
+  testimonialLoadedAll: '[testimonial] Loaded All',
   testimonialLogout: '[testimonial] Logout',
   testimonialSetActive: '[testimonial] Set Active',
   testimonialClearActive: '[testimonial] Clear Active',

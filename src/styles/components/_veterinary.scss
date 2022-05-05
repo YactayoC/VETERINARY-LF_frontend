@@ -1,4 +1,4 @@
-@use "../base/mixins" as m;
+@use '../base/mixins' as m;
 
 // About
 .about__grid {
@@ -131,152 +131,155 @@
 
 // Services
 .services__grid {
-    margin-top: 4rem;
+  margin-top: 4rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin-inline: 5rem;
+
+  @include m.phone {
+    margin-top: 8rem;
     display: flex;
-    gap: 2rem;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     text-align: center;
     margin-inline: 5rem;
-  
-    @include m.phone {
-      margin-top: 8rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: center;
-      margin-inline: 5rem;
-    }
   }
-  
-  .services__info {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: transform 0.3s ease;
-  
-    &:hover {
-      transform: scale(1.1);
-    }
-  
-    &:hover .services__text {
-      color: $primary;
-    }
-  }
-  
-  .services__icon {
-    background-color: transparent;
-    color: $primary;
-    font-size: 6rem;
-  }
-  
-  .services__text {
-    color: $black;
-    line-height: 1.5;
-    transition: color 0.3s ease;
+}
+
+.services__info {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
   }
 
-  // Delivery
-  .delivery {
-    align-items: center;
-    background-image: url(../../../public/assets/ui/section.png);
-    background-size: cover;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    margin-top: 4rem;
-    padding-block: 6rem; 
+  &:hover .services__text {
+    color: $primary;
+  }
+}
+
+.services__icon {
+  background-color: transparent;
+  color: $primary;
+  font-size: 6rem;
+}
+
+.services__text {
+  color: $black;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+// Delivery
+.delivery {
+  align-items: center;
+  background-image: url(../../../public/assets/ui/section.png);
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  padding-block: 6rem;
 }
 
 .delivery h2 {
-    color: $white;
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 4rem;
-    text-align: center;
+  color: $white;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 4rem;
+  text-align: center;
 
-    @include m.phone {
-        text-align: unset;
-    }
+  @include m.phone {
+    text-align: unset;
+  }
 }
 
 .delivery p {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: $white;
-    margin-bottom: 2rem;
-    text-align: center;
-    padding-inline: 4rem;
-    width: auto;
-    line-height: 2;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-inline: 4rem;
+  width: auto;
+  line-height: 2;
 
-    @include m.phone {
-        width: 50rem;
-    }
+  @include m.phone {
+    width: 50rem;
+  }
 }
 
 // Testimonials
 .testimonials__grid {
-    margin-top: 4rem;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 2rem;
-    padding-inline: 2rem;
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding-inline: 2rem;
 
-    @include m.phone {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  @include m.phone {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .testimonial__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .testimonial__card-text {
-    background-color: $white;
-    padding-top: 2rem;
-    padding-inline: 2rem;
-    max-width: 70%;
-    position: relative;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  background-color: $white;
+  padding-top: 2rem;
+  padding-inline: 2rem;
+  max-width: 70%;
+  position: relative;
 }
 
 .testimonial__card-text p {
-    line-height: 2;
-    font-size: 1.1rem;
+  line-height: 2;
+  font-size: 1.1rem;
 }
 
 .testimonial__quote {
-    position: absolute;
-    left: 10px;
-    font-size: 1.2rem;
-    color: $primary;
+  position: absolute;
+  left: 10px;
+  font-size: 1.2rem;
+  color: $primary;
 }
 
 .testimonial__card-author {
-    align-items: center;
-    background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    overflow: hidden;
-    padding-block: 1rem;
-    width: 100%;
+  align-items: center;
+  background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  overflow: hidden;
+  padding-block: 1rem;
+  width: 100%;
 }
 
-.testimonial__card-author img{
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
+.testimonial__card-author img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
 }
 
-.testimonial__card-author h3{
-    color: $white;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0;
+.testimonial__card-author h3 {
+  color: $white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
 }
-

@@ -3,6 +3,7 @@ import { types } from '../types/types';
 const initialState = {
   data: false,
   testimonials: [],
+  testimonialsAll: [],
   activeTestimonial: null,
 };
 
@@ -49,6 +50,12 @@ export const testimonialReducer = (state = initialState, action) => {
       return {
         ...state,
         testimonials: state.testimonials.map((e) => (e._id === action.payload._id ? action.payload : e)),
+      };
+
+    case types.testimonialLoadedAll:
+      return {
+        ...state,
+        testimonialsAll: [...action.payload],
       };
 
     default:

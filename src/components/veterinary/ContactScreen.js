@@ -5,6 +5,7 @@ import { Footer } from '../ui/Footer';
 import { Hero } from '../ui/Hero';
 import { NavBar } from '../ui/NavBar';
 import { isEmail, isMobilePhone } from 'validator';
+
 //TODO: Add actions redux
 const initialState = {
   fullname: '',
@@ -33,7 +34,7 @@ export const ContactScreen = () => {
   const handleCheck = () => {
     const check = document.getElementById('checkbox1');
     const button = document.getElementById('buttonSend');
-
+    console.log(valuesForm);
     if (check.checked) {
       button.disabled = false;
       return true;

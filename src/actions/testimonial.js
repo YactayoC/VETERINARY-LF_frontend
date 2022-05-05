@@ -1,4 +1,4 @@
-import { fetchToken } from '../helpers/fetch';
+import { fetchNotToken, fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
 
@@ -90,6 +90,24 @@ export const testimonialStartLoading = () => {
 
 const testimonialsLoaded = (testimonials) => ({
   type: types.testimonialLoaded,
+  payload: testimonials,
+});
+
+export const testimonialStartLoadingAll = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchNotToken('testimonial/getTestimonialsAll');
+      const body = await resp.json();
+      const testimonials = body.testimonials;
+      dispatch(testimonialsLoadedAll(testimonials));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const testimonialsLoadedAll = (testimonials) => ({
+  type: types.testimonialLoadedAll,
   payload: testimonials,
 });
 

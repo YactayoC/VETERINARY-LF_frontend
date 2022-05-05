@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { testimonialStartLoadingAll } from '../../actions/testimonial';
 import { Footer } from '../ui/Footer';
 import { Hero } from '../ui/Hero';
 import { NavBar } from '../ui/NavBar';
+import { Testimonial } from './Testimonial';
 
 export const MainScreen = () => {
+  const dispatch = useDispatch();
+  const testimonialsAll = useSelector((state) => state.testimonials.testimonialsAll);
+
+  useEffect(() => {
+    dispatch(testimonialStartLoadingAll());
+  }, [dispatch]);
+
   return (
     <>
       <NavBar />
       <Hero
-        title="LoalyFriend is the first comprehensive veterinary service at home in Chilca"
+        title="LoyalFriend is the first comprehensive veterinary service at home in Chilca"
         description=" Chilca – San José – Las Salinas – Pucusana"
         img="../assets/ui/mascots.png"
       />
@@ -90,7 +100,7 @@ export const MainScreen = () => {
       <section className="delivery animate__animated animate__fadeIn">
         <h2>¿Why do we delivery?</h2>
         <p>
-          Because at Autovet we think that neither you nor your pets deserve the long and uncomfortable waits of
+          Because at LoyalFriend we think that neither you nor your pets deserve the long and uncomfortable waits of
           traditional clinics. You will save time and comfort! In addition, you will avoid the risk of contagion of
           infectious diseases, especially if your pet is in its first months of life or is sick, that is, with low
           defenses.
@@ -98,61 +108,15 @@ export const MainScreen = () => {
       </section>
 
       <section className="testimonials__grid animate__animated animate__fadeIn">
-        <div className="testimonial__card">
-          <div className="testimonial__card-text">
-            <i className="fa-solid fa-quote-left testimonial__quote"></i>
-            <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
-              vero eos magna lorem lorem relo mrelo rmasda
-            </p>
-          </div>
-          <div className="testimonial__card-author">
-            <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>Jhon Doe</h3>
-          </div>
-        </div>
-
-        <div className="testimonial__card">
-          <div className="testimonial__card-text">
-            <i className="fa-solid fa-quote-left testimonial__quote"></i>
-            <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
-              vero eos magna lorem lorem relo mrelo rmasda
-            </p>
-          </div>
-          <div className="testimonial__card-author">
-            <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>Jhon Doe</h3>
-          </div>
-        </div>
-
-        <div className="testimonial__card">
-          <div className="testimonial__card-text">
-            <i className="fa-solid fa-quote-left testimonial__quote"></i>
-            <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
-              vero eos magna lorem lorem relo mrelo rmasda
-            </p>
-          </div>
-          <div className="testimonial__card-author">
-            <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>Jhon Doe</h3>
-          </div>
-        </div>
-
-        <div className="testimonial__card">
-          <div className="testimonial__card-text">
-            <i className="fa-solid fa-quote-left testimonial__quote"></i>
-            <p>
-              Lorem ipsum dolor sit amet sit no dolore dignissim ex in invidunt elitr ut et labore velit duo est erat id
-              vero eos magna lorem lorem relo mrelo rmasda
-            </p>
-          </div>
-          <div className="testimonial__card-author">
-            <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>Jhon Doe</h3>
-          </div>
-        </div>
+        {testimonialsAll ? (
+          <>
+            {testimonialsAll.map((testimonial) => (
+              <Testimonial key={testimonial._id} {...testimonial} type="testimonial" />
+            ))}
+          </>
+        ) : (
+          <p className="no-results">No testimonials found</p>
+        )}
       </section>
 
       <Footer />
