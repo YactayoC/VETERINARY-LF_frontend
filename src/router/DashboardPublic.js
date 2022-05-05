@@ -8,7 +8,7 @@ export const DashboardPublic = () => {
     <Routes>
       <Route path="login" element={<LoginScreen />} />
       <Route path="register" element={<RegisterScreen />} />
-      <Route path="/*" element={<Navigate to="/auth/login" />} />
+      <Route path="*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
 };

@@ -10,7 +10,7 @@ export const DashboardPrivate = () => {
       <Route path="appointments" element={<ClientAppointment />} />
       <Route path="testimonial" element={<ClientTestimonial />} />
       <Route path="settings" element={<ClientSetting />} />
-      <Route path="/*" element={<Navigate to="/profile/appointments" />} />
+      <Route path="*" element={<Navigate to="/profile/appointments" />} />
     </Routes>
   );
 };
