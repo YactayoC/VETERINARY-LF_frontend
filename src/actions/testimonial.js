@@ -111,6 +111,19 @@ const testimonialsLoadedAll = (testimonials) => ({
   payload: testimonials,
 });
 
+export const adminTestimonialsLoaded = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken('testimonial/getTestimonials');
+      const body = await resp.json();
+      const testimonials = body.testimonials;
+      dispatch(testimonialsLoaded(testimonials));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Testimonial Logout
 export const testimonialStartLogout = () => ({
   type: types.testimonialLogout,

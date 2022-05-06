@@ -4,10 +4,13 @@ import { appointmentStartActive, appointmentStartDeleted } from '../../actions/a
 import { testimonialStartActive, testimonialStartDeleted } from '../../actions/testimonial';
 
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 
-export const Item = ({ _id, date, state, symptom, type, testimonial, mascot }) => {
+export const Item = ({ _id, date, state, symptom, type, testimonial, mascot, client }) => {
   const dispatch = useDispatch();
   const dateConfig = moment(date);
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const handleOpenModalTestimonial = (e) => {
     const dad = e.target.parentElement.parentElement;
@@ -25,10 +28,17 @@ export const Item = ({ _id, date, state, symptom, type, testimonial, mascot }) =
     const symptom = dad.childNodes[0].textContent;
     const date = moment(dad.childNodes[1].textContent);
     const mascot = dad.childNodes[2].textContent;
+    const state = dad.childNodes[4].textContent;
 
     const modal = document.querySelector('.modal');
     modal.classList.remove('modal__hide');
-    dispatch(appointmentStartActive({ _id, symptom, date, mascot }));
+
+    if (pathname.includes('dashboard')) {
+      const fullname = dad.childNodes[3].textContent;
+      dispatch(appointmentStartActive({ _id, state, fullname }));
+    } else {
+      dispatch(appointmentStartActive({ _id, symptom, date, mascot }));
+    }
   };
 
   if (type === 'testimonial') {
@@ -55,10 +65,17 @@ export const Item = ({ _id, date, state, symptom, type, testimonial, mascot }) =
       dispatch(appointmentStartDeleted(id));
     };
     return (
-      <ul className="appointment-data__datas-data">
+      <ul
+        className={
+          pathname.includes('dashboard')
+            ? 'appointment-data__datas-data appointment-data__datas-data-admin'
+            : 'appointment-data__datas-data'
+        }
+      >
         <li className="appointment-data__datas-element">{symptom}</li>
         <li className="appointment-data__datas-element">{dateConfig.format('DD-MM-YYYY HH:mm')}</li>
         <li className="appointment-data__datas-element">{mascot}</li>
+        {pathname.includes('dashboard') && <li className="appointment-data__datas-element">{client.fullname}</li>}
         <li className="appointment-data__datas-element">{state}</li>
 
         <li className="appointment-data__datas-element">

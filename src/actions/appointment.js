@@ -53,6 +53,28 @@ const appointmentUpdated = (appointment) => ({
   payload: appointment,
 });
 
+export const adminAppointmentUpdateState = (appointment) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken(`appointment/updateAppointmentState/${appointment._id}`, appointment, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) {
+        body.appointment.client = {
+          _id: appointment._id,
+          fullname: appointment.fullname,
+        };
+        dispatch(appointmentUpdated(body.appointment));
+        Swal.fire('Success', body.msg, 'success');
+      } else {
+        Swal.fire('Error', body.msg, 'error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Delete Appointment
 export const appointmentStartDeleted = (id) => {
   return async (dispatch) => {
@@ -95,6 +117,19 @@ const appointmentsLoaded = (appointments) => ({
   type: types.appointmentLoaded,
   payload: appointments,
 });
+
+export const adminAppointmentsStartLoading = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken('appointment/getAppointments');
+      const body = await resp.json();
+      const appointments = body.appointments;
+      dispatch(appointmentsLoaded(appointments));
+    } catch (error) {
+      Swal.fire('Error', 'There wan an error', 'error');
+    }
+  };
+};
 
 // Clear Appointments
 export const appointmentLogout = () => ({

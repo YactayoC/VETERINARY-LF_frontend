@@ -49,7 +49,6 @@ export const ClientAppointment = () => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-
     if (isFormValid()) {
       dispatch(eventStartAddNew(formValues));
       handleCloseModal();

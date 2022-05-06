@@ -124,6 +124,15 @@
   }
 }
 
+.appointment-data__datas-header-admin,
+.appointment-data__datas-data-admin {
+  grid-template-columns: repeat(7, 60px);
+
+  @include m.phone {
+    grid-template-columns: repeat(7, 125px);
+  }
+}
+
 .appointment-data__datas-element {
   text-align: center;
   cursor: pointer;

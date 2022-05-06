@@ -27,4 +27,6 @@ export const types = {
   testimonialLogout: '[testimonial] Logout',
   testimonialSetActive: '[testimonial] Set Active',
   testimonialClearActive: '[testimonial] Clear Active',
+
+  adminTestimonialsLoaded: '[admin] Testimonials Loaded',
 };

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
 
@@ -7,6 +7,10 @@ export const Aside = () => {
   const dispatch = useDispatch();
   const { fullname } = useSelector((state) => state.auth);
   const width = document.documentElement.scrollWidth;
+
+  const location = useLocation();
+  const pathname = location.pathname;
+  console.log();
 
   useEffect(() => {
     if (width >= 480) {
@@ -49,21 +53,21 @@ export const Aside = () => {
         </div>
         <NavLink
           className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
-          to="/profile/appointments"
+          to={pathname.includes('dashboard') ? '/dashboard/appointments' : '/profile/appointments'}
         >
           <i className="fa-solid fa-calendar-check"></i>
           <p>Appointments</p>
         </NavLink>
         <NavLink
           className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
-          to="/profile/testimonial"
+          to={pathname.includes('dashboard') ? '/dashboard/testimonials' : '/profile/testimonial'}
         >
           <i className="fa-solid fa-pen-to-square"></i>
           <p>Testimonials</p>
         </NavLink>
         <NavLink
           className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
-          to="/profile/settings"
+          to={pathname.includes('dashboard') ? '/dashboard/settings' : '/profile/settings'}
         >
           <i className="fa-solid fa-gear"></i>
           <p>Settings</p>

@@ -13,6 +13,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { DashboardPrivate } from './DashboardPrivate';
 import { Loading } from '../components/ui/Loading';
 import { ConfirmScreen } from '../components/veterinary/ConfirmScreen';
+import { DashboardPrivateAdmin } from './DashboardPrivateAdmin';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,15 @@ export const AppRouter = () => {
           element={
             <PrivateRoute isAuthenticated={!!uid}>
               <DashboardPrivate />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard/*"
+          element={
+            <PrivateRoute isAuthenticated={!!uid}>
+              <DashboardPrivateAdmin />
             </PrivateRoute>
           }
         />
