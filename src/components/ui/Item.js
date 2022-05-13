@@ -5,8 +5,22 @@ import { testimonialStartActive, testimonialStartDeleted } from '../../actions/t
 
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
+import { employeeStartActive, employeeStartDeleted } from '../../actions/employees';
 
-export const Item = ({ _id, date, state, symptom, type, testimonial, mascot, client }) => {
+export const Item = ({
+  _id,
+  date,
+  state,
+  symptom,
+  type,
+  testimonial,
+  mascot,
+  client,
+  fullname,
+  phone,
+  email,
+  address,
+}) => {
   const dispatch = useDispatch();
   const dateConfig = moment(date);
   const location = useLocation();
@@ -41,19 +55,35 @@ export const Item = ({ _id, date, state, symptom, type, testimonial, mascot, cli
     }
   };
 
+  const handleOpenModalEmployee = (e) => {
+    const dad = e.target.parentElement.parentElement;
+    const _id = e.target.getAttribute('data-id');
+    const fullname = dad.childNodes[0].textContent;
+    const phone = dad.childNodes[1].textContent;
+    const email = dad.childNodes[2].textContent;
+    const address = dad.childNodes[3].textContent;
+    const modal = document.querySelector('.modal');
+    modal.classList.remove('modal__hide');
+    dispatch(employeeStartActive({ _id, fullname, phone, email, address }));
+  };
+
   if (type === 'testimonial') {
     const handleRemove = (e) => {
       const id = e.target.getAttribute('data-id');
       dispatch(testimonialStartDeleted(id));
     };
+
     return (
       <ul className="testimonial-data__datas-data">
         <li className="appointment-data__datas-element">{testimonial}</li>
         <li className="appointment-data__datas-element">{dateConfig.format('DD-MM-YYYY')}</li>
-        <li className="appointment-data__datas-element">
-          <i className="fa-solid fa-pen element-edit" data-id={_id} onClick={handleOpenModalTestimonial}></i>
-        </li>
-
+        {pathname.includes('dashboard') ? (
+          <li>{client.fullname}</li>
+        ) : (
+          <li className="appointment-data__datas-element">
+            <i className="fa-solid fa-pen element-edit" data-id={_id} onClick={handleOpenModalTestimonial}></i>
+          </li>
+        )}
         <li className="appointment-data__datas-element ">
           <i className="fa-solid fa-xmark element-remove" data-id={_id} onClick={handleRemove}></i>
         </li>
@@ -82,6 +112,32 @@ export const Item = ({ _id, date, state, symptom, type, testimonial, mascot, cli
           <i className="fa-solid fa-pen element-edit" data-id={_id} onClick={handleOpenModalAppointment}></i>
         </li>
 
+        <li className="appointment-data__datas-element ">
+          <i className="fa-solid fa-xmark element-remove" data-id={_id} onClick={handleRemove}></i>
+        </li>
+      </ul>
+    );
+  } else if (type === 'employees') {
+    const handleRemove = (e) => {
+      const id = e.target.getAttribute('data-id');
+      dispatch(employeeStartDeleted(id));
+    };
+
+    return (
+      <ul
+        className={
+          pathname.includes('dashboard')
+            ? 'employee-data__datas-data employee-data__datas-data-admin'
+            : 'employee-data__datas-data'
+        }
+      >
+        <li className="appointment-data__datas-element">{fullname}</li>
+        <li className="appointment-data__datas-element">{phone}</li>
+        <li className="appointment-data__datas-element">{email}</li>
+        <li className="appointment-data__datas-element">{address}</li>
+        <li className="appointment-data__datas-element">
+          <i className="fa-solid fa-pen element-edit" data-id={_id} onClick={handleOpenModalEmployee}></i>
+        </li>
         <li className="appointment-data__datas-element ">
           <i className="fa-solid fa-xmark element-remove" data-id={_id} onClick={handleRemove}></i>
         </li>

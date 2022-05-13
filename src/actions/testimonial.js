@@ -111,11 +111,12 @@ const testimonialsLoadedAll = (testimonials) => ({
   payload: testimonials,
 });
 
-export const adminTestimonialsLoaded = () => {
+export const adminTestimonialsStartLoading = () => {
   return async (dispatch) => {
     try {
       const resp = await fetchToken('testimonial/getTestimonials');
       const body = await resp.json();
+      console.log(body);
       const testimonials = body.testimonials;
       dispatch(testimonialsLoaded(testimonials));
     } catch (error) {

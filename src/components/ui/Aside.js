@@ -10,7 +10,6 @@ export const Aside = () => {
 
   const location = useLocation();
   const pathname = location.pathname;
-  console.log();
 
   useEffect(() => {
     if (width >= 480) {
@@ -44,7 +43,9 @@ export const Aside = () => {
       </div>
 
       <div className="aside__title">
-        <h2 className="aside__title-text">LoyalFriend</h2>
+        <h2 className={pathname.includes('dashboard') ? 'aside__title-text-admin' : 'aside__title-text'}>
+          LoyalFriend
+        </h2>
       </div>
       <nav className="aside__nav">
         <div className="aside__profile">
@@ -65,6 +66,15 @@ export const Aside = () => {
           <i className="fa-solid fa-pen-to-square"></i>
           <p>Testimonials</p>
         </NavLink>
+        {pathname.includes('dashboard') && (
+          <NavLink
+            className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
+            to={pathname.includes('dashboard') && '/dashboard/employees'}
+          >
+            <i className="fa-solid fa-users"></i>
+            <p>Employees</p>
+          </NavLink>
+        )}
         <NavLink
           className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
           to={pathname.includes('dashboard') ? '/dashboard/settings' : '/profile/settings'}

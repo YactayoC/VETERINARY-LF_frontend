@@ -12,7 +12,7 @@ const initialState = {
   password: '',
 };
 
-export const LoginScreen = () => {
+export const LoginEmployeeScreen = () => {
   const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm(initialState);
   const { email, password } = formValues;
@@ -83,12 +83,6 @@ export const LoginScreen = () => {
         </div>
         <div className="form__submit">
           <button>Login</button>
-          <p>
-            Don't have an account? <Link to="/auth/register">Sign Up</Link>
-            <br />
-            <br />
-            Are you an employee? <Link to="/auth/login-employee">Sign In</Link>
-          </p>
         </div>
       </form>
     </div>

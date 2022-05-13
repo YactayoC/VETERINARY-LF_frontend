@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { adminTestimonialsStartLoading } from '../../actions/testimonial';
 import { Aside } from '../ui/Aside';
 import { Data } from '../ui/Data';
+import { Item } from '../ui/Item';
 
 export const AdminTestimonials = () => {
+  const dispatch = useDispatch();
+  const { data, testimonials } = useSelector((state) => state.testimonials);
+
+  useEffect(() => {
+    dispatch(adminTestimonialsStartLoading());
+  }, [dispatch]);
+
   return (
     <div className="appointment">
       <Aside />
@@ -15,11 +25,11 @@ export const AdminTestimonials = () => {
             <ul className="testimonial-data__datas-header">
               <li className="appointment-data__datas-element">Info</li>
               <li className="appointment-data__datas-element">Date</li>
-              <li className="appointment-data__datas-element">Edit</li>
+              <li className="appointment-data__datas-element">Client</li>
               <li className="appointment-data__datas-element">Remove</li>
             </ul>
 
-            {/* {data && testimonials.length >= 1 ? (
+            {data && testimonials.length >= 1 ? (
               <>
                 {testimonials.map((testimoniale) => (
                   <Item key={testimoniale._id} {...testimoniale} type="testimonial" />
@@ -27,7 +37,7 @@ export const AdminTestimonials = () => {
               </>
             ) : (
               <p className="no-results">No testimonials found</p>
-            )} */}
+            )}
           </div>
         </div>
       </div>

@@ -61,8 +61,15 @@
   }
 }
 
-.aside__title h2 {
+.aside__title-text {
   background: linear-gradient(to right, #aaffa9, #11ffbd);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.aside__title-text-admin {
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
   -webkit-background-clip: text;
   color: transparent;
   margin: 0;

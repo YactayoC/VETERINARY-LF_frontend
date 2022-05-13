@@ -4,7 +4,7 @@ import {
   appointmentClearActive,
   appointmentStartLoading,
   appointmentStartUpdate,
-  eventStartAddNew,
+  appointmentStartAddNew,
 } from '../../actions/appointment';
 import { useForm } from '../../hooks/useForm';
 import { Aside } from '../ui/Aside';
@@ -34,12 +34,6 @@ export const ClientAppointment = () => {
   const dateNow = moment().format('YYYY-MM-DD HH:mm');
   const dateConfig = moment(date);
 
-  const handleCloseModal = () => {
-    const modal = document.querySelector('.modal');
-    modal.classList.add('modal__hide');
-    dispatch(appointmentClearActive());
-  };
-
   useEffect(() => {
     dispatch(appointmentStartLoading());
     if (!activeAppointment) return;
@@ -47,10 +41,16 @@ export const ClientAppointment = () => {
     // eslint-disable-next-line
   }, [dispatch, activeAppointment]);
 
+  const handleCloseModal = () => {
+    const modal = document.querySelector('.modal');
+    modal.classList.add('modal__hide');
+    dispatch(appointmentClearActive());
+  };
+
   const handleAdd = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      dispatch(eventStartAddNew(formValues));
+      dispatch(appointmentStartAddNew(formValues));
       handleCloseModal();
       reset(initialState);
     }

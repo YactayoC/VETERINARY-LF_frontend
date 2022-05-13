@@ -29,4 +29,10 @@ export const types = {
   testimonialClearActive: '[testimonial] Clear Active',
 
   adminTestimonialsLoaded: '[admin] Testimonials Loaded',
+  adminEmployeesLoaded: '[admin] Employees Loaded',
+  adminEmployeesAddNew: '[admin] Employees Add New',
+  adminEmployeeDeleted: '[admin] Employee Deleted',
+  adminEmployeeSetActive: '[admin] Employee Set Active',
+  adminEmployeeClearActive: '[admin] Employee Clear Active',
+  adminEmployeeUpdated: '[admin] Employee Updated',
 };

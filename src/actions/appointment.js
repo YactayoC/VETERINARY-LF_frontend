@@ -3,7 +3,7 @@ import { fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
 
 // Add new appointment
-export const eventStartAddNew = (appointment) => {
+export const appointmentStartAddNew = (appointment) => {
   return async (dispatch, getState) => {
     const { uid, fullname } = getState().auth;
     try {

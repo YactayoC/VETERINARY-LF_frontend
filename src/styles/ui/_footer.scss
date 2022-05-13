@@ -12,9 +12,7 @@
   gap: 4rem;
 
   @include m.phone {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 4rem;
     gap: 8rem;
   }
 }

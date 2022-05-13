@@ -43,5 +43,19 @@ export const Data = ({ title, button }) => {
         )}
       </div>
     );
+  } else if (title === 'Employees') {
+    return (
+      <div className="data__general">
+        <div>
+          <i className="fa-solid fa-users"></i>
+          <h3>{title}</h3>
+        </div>
+
+        <button onClick={handleOpenModal} disabled={testimonials.length === 1}>
+          <i className="fa-solid fa-circle-plus"></i>
+          <p>{button}</p>
+        </button>
+      </div>
+    );
   }
 };
