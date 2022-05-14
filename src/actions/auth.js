@@ -62,20 +62,18 @@ const logout = () => ({
 });
 
 export const startChecking = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     const type = localStorage.getItem('type') || '';
     let resp = null;
     let body = null;
 
     if (type !== undefined && type === 'client') {
-      console.log('entrando a cliente');
       resp = await fetchToken('auth/revalidate');
       body = await resp.json();
       if (body.ok) {
         dispatch(infoStartLoading());
       }
     } else if (type !== undefined && type === 'employee') {
-      console.log('entrando a empleado');
       resp = await fetchToken('employee/revalidate-employee');
       body = await resp.json();
       if (body.ok) {
