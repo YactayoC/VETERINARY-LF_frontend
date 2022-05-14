@@ -5,7 +5,7 @@ import { startLogout } from '../../actions/auth';
 
 export const NavBar = () => {
   const dispatch = useDispatch();
-  const { uid, fullname } = useSelector((state) => state.auth);
+  const { uid, fullname, type } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(startLogout());
@@ -36,7 +36,10 @@ export const NavBar = () => {
 
           {uid && fullname ? (
             <>
-              <Link className="nav__link nav__link-user" to="/profile/settings">
+              <Link
+                className="nav__link nav__link-user"
+                to={type === 'client' ? '/profile/settings' : '/dashboard/appointments'}
+              >
                 <i className="fa-solid fa-user nav__link-user--on"></i>
                 <p>{fullname}</p>
               </Link>
@@ -85,7 +88,10 @@ export const NavBar = () => {
 
           {uid && fullname ? (
             <>
-              <Link className="nav__link nav__link--phone nav__link-user" to="/profile/settings">
+              <Link
+                className="nav__link nav__link--phone nav__link-user"
+                to={type === 'client' ? '/profile/settings' : '/dashboard/appointments'}
+              >
                 <i className="fa-solid fa-user nav__link-user--on"></i>
                 <p>{fullname}</p>
               </Link>

@@ -21,6 +21,18 @@ const infoLoaded = (data) => ({
   payload: data,
 });
 
+export const employeeInfoStartLoading = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken('employee/profile-employee');
+      const body = await resp.json();
+      dispatch(infoLoaded(body.employee));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // Update info
 export const infoStartUpdate = (valuesForm) => {
   return async (dispatch) => {
@@ -46,6 +58,26 @@ const infoUpdated = (valuesForm) => ({
   type: types.infoUpdated,
   payload: valuesForm,
 });
+
+export const employeeInfoStartUpdate = (valuesForm) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchToken(`employee/profile-employee`, valuesForm, 'PUT');
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(infoUpdated(valuesForm));
+        dispatch(employeeInfoStartLoading());
+        dispatch(startChecking());
+        Swal.fire('Success', body.msg, 'success');
+      } else {
+        Swal.fire('Error', body.msg, 'error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 // Logout
 export const infoLogout = () => ({

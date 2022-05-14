@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { isEmail } from 'validator';
-import { startLogin } from '../../actions/auth';
 
 import Swal from 'sweetalert2';
+import { employeeStartLogin } from '../../actions/employees';
 
 const initialState = {
   email: '',
@@ -21,10 +21,10 @@ export const LoginEmployeeScreen = () => {
     e.preventDefault();
 
     if (isFormValid() === true) {
-      dispatch(startLogin(email, password));
+      dispatch(employeeStartLogin(email, password));
       Swal.fire({
         title: 'Loading...',
-        text: 'Please wait',
+        text: 'Welcome veterinary',
         allowOutsideClick: false,
         showConfirmButton: false,
         timer: 1000,
@@ -58,7 +58,7 @@ export const LoginEmployeeScreen = () => {
       </div>
 
       <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit}>
-        <h2>Login in Loyal Friend</h2>
+        <h2 className="form__heading-admin">Login in Loyal Friend</h2>
         <div className="form__group">
           <input
             className="form__input"

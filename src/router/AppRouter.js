@@ -14,15 +14,16 @@ import { DashboardPrivate } from './DashboardPrivate';
 import { Loading } from '../components/ui/Loading';
 import { ConfirmScreen } from '../components/veterinary/ConfirmScreen';
 import { DashboardPrivateAdmin } from './DashboardPrivateAdmin';
+import { PrivateRouteEmployee } from './PrivateRouteEmployee';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
-  const { checking, uid } = useSelector((state) => state.auth);
+  const { checking, uid, type } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.info);
 
   useEffect(() => {
     dispatch(startChecking());
-  }, [dispatch]);
+  }, [dispatch, type]);
 
   if (checking && !data) {
     return <Loading />;
@@ -45,23 +46,25 @@ export const AppRouter = () => {
           }
         />
 
-        <Route
-          path="/profile/*"
-          element={
-            <PrivateRoute isAuthenticated={!!uid}>
-              <DashboardPrivate />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/dashboard/*"
-          element={
-            <PrivateRoute isAuthenticated={!!uid}>
-              <DashboardPrivateAdmin />
-            </PrivateRoute>
-          }
-        />
+        {type === 'client' ? (
+          <Route
+            path="/profile/*"
+            element={
+              <PrivateRouteEmployee isAuthenticated={!!uid}>
+                <DashboardPrivate />
+              </PrivateRouteEmployee>
+            }
+          />
+        ) : (
+          <Route
+            path="/dashboard/*"
+            element={
+              <PrivateRoute isAuthenticated={!!uid}>
+                <DashboardPrivateAdmin />
+              </PrivateRoute>
+            }
+          />
+        )}
 
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>

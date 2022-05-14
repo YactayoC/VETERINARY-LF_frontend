@@ -45,6 +45,11 @@ export const employeeReducer = (state = initialState, action) => {
         employees: [...action.payload],
       };
 
+    case types.adminEmployeeStartLogout:
+      return {
+        ...initialState,
+      };
+
     default:
       return state;
   }

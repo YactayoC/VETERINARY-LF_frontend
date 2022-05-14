@@ -51,7 +51,7 @@ export const Data = ({ title, button }) => {
           <h3>{title}</h3>
         </div>
 
-        <button onClick={handleOpenModal} disabled={testimonials.length === 1}>
+        <button onClick={handleOpenModal}>
           <i className="fa-solid fa-circle-plus"></i>
           <p>{button}</p>
         </button>

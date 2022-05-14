@@ -1,9 +1,10 @@
 import { fetchNotToken, fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
 import { appointmentLogout } from './appointment';
-import { infoLogout, infoStartLoading } from './info';
+import { employeeInfoStartLoading, infoLogout, infoStartLoading } from './info';
 import Swal from 'sweetalert2';
 import { testimonialStartLogout } from './testimonial';
+import { employeeStartLogout } from './employees';
 
 export const startRegister = (fullname, phone, address, email, password) => {
   return async (dispatch) => {
@@ -25,10 +26,12 @@ export const startLogin = (email, password) => {
 
     if (body.ok) {
       localStorage.setItem('token', body.token);
+      localStorage.setItem('type', body.type);
       dispatch(
         login({
           uid: body.uid,
           fullname: body.fullname,
+          type: body.type,
         }),
       );
       dispatch(infoStartLoading());
@@ -50,6 +53,7 @@ export const startLogout = () => {
     dispatch(infoLogout());
     dispatch(appointmentLogout());
     dispatch(testimonialStartLogout());
+    dispatch(employeeStartLogout());
   };
 };
 
@@ -58,22 +62,39 @@ const logout = () => ({
 });
 
 export const startChecking = () => {
-  return async (dispatch) => {
-    const resp = await fetchToken('auth/revalidate');
-    const body = await resp.json();
+  return async (dispatch, getState) => {
+    const type = localStorage.getItem('type') || '';
+    let resp = null;
+    let body = null;
 
-    if (body.ok) {
-      localStorage.setItem('token', body.token);
-      dispatch(
-        login({
-          uid: body.uid,
-          fullname: body.fullname,
-        }),
-      );
-      dispatch(infoStartLoading());
+    if (type !== undefined && type === 'client') {
+      console.log('entrando a cliente');
+      resp = await fetchToken('auth/revalidate');
+      body = await resp.json();
+      if (body.ok) {
+        dispatch(infoStartLoading());
+      }
+    } else if (type !== undefined && type === 'employee') {
+      console.log('entrando a empleado');
+      resp = await fetchToken('employee/revalidate-employee');
+      body = await resp.json();
+      if (body.ok) {
+        dispatch(employeeInfoStartLoading());
+      }
     } else {
       dispatch(checkingFinish());
+      startChecking();
+      return;
     }
+
+    localStorage.setItem('token', body.token);
+    dispatch(
+      login({
+        uid: body.uid,
+        fullname: body.fullname,
+        type: body.type,
+      }),
+    );
   };
 };
 
@@ -81,15 +102,34 @@ const checkingFinish = () => ({
   type: types.authCheckingFinish,
 });
 
+// export const employeeStartChecking = () => {
+//   return async (dispatch) => {
+//     const resp = await fetchToken('employee/revalidate-employee');
+//     const body = await resp.json();
+
+//     if (body.ok) {
+//       localStorage.setItem('token', body.token);
+//       dispatch(
+//         login({
+//           uid: body.uid,
+//           fullname: body.fullname,
+//           type: body.type,
+//         }),
+//       );
+//       dispatch(employeeInfoStartLoading());
+//     } else {
+//       dispatch(checkingFinish());
+//     }
+//   };
+// };
+
 // Confirm
 export const startConfirm = (token) => {
   return async (dispatch) => {
     const resp = await fetchNotToken(`auth/confirm/${token}`);
     const body = await resp.json();
 
-    if (body.ok) {
-      //Swal.fire('Success', body.msg, 'success');
-    } else {
+    if (!body.ok) {
       Swal.fire('Error', body.msg, 'error');
     }
   };

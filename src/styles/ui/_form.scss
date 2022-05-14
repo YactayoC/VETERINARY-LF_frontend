@@ -24,6 +24,12 @@
   }
 }
 
+.form__heading-admin {
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 .form__group {
   display: flex;
   flex-direction: column;

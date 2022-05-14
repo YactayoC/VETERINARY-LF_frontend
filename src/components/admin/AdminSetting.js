@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { infoStartUpdate } from '../../actions/info';
+import { employeeInfoStartUpdate, infoStartUpdate } from '../../actions/info';
 import { useForm } from '../../hooks/useForm';
 import { Aside } from '../ui/Aside';
 import { Loading } from '../ui/Loading';
@@ -31,9 +31,9 @@ export const AdminSetting = () => {
   }
 
   const { fullname: fullnameUser } = user;
-  const handleUpdateClient = (e) => {
+  const handleUpdateEmployee = (e) => {
     e.preventDefault();
-    dispatch(infoStartUpdate(formValues));
+    dispatch(employeeInfoStartUpdate(formValues));
   };
 
   return (
@@ -45,7 +45,7 @@ export const AdminSetting = () => {
             <i className="fa-solid fa-gear"></i>
             <h3>Settings</h3>
           </div>
-          <button data-id={uid} onClick={handleUpdateClient}>
+          <button data-id={uid} onClick={handleUpdateEmployee}>
             <i className="fa-solid fa-pen-clip"></i>
             <p>Update Data</p>
           </button>

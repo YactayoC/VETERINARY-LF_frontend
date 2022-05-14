@@ -1,30 +1,32 @@
 import Swal from 'sweetalert2';
 import { fetchNotToken, fetchToken } from '../helpers/fetch';
 import { types } from '../types/types';
+import { employeeInfoStartLoading } from './info';
 
 // Login employee
-export const employeeStartLogin = (email, password) => async (dispatch) => {
+export const employeeStartLogin = (email, password) => {
   return async (dispatch) => {
-    const resp = await fetchNotToken('auth/login', { email, password }, 'POST');
+    const resp = await fetchNotToken('employee/login-employee', { email, password }, 'POST');
     const body = await resp.json();
 
     if (body.ok) {
       localStorage.setItem('token', body.token);
+      localStorage.setItem('type', body.type);
       dispatch(
-        adminLogin({
+        employeeLogin({
           uid: body.uid,
           fullname: body.fullname,
           type: body.type,
         }),
       );
-      //dispatch(infoStartLoading());
+      dispatch(employeeInfoStartLoading());
     } else {
       Swal.fire('Error', body.msg, 'error');
     }
   };
 };
 
-const adminLogin = (user) => ({
+const employeeLogin = (user) => ({
   type: types.authLogin,
   payload: user,
 });
@@ -127,4 +129,8 @@ export const employeeStartLoading = () => {
 const employeesLoaded = (employees) => ({
   type: types.adminEmployeesLoaded,
   payload: employees,
+});
+
+export const employeeStartLogout = () => ({
+  type: types.adminEmployeeStartLogout,
 });
