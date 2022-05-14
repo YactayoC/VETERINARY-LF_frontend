@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { employeeInfoStartUpdate, infoStartUpdate } from '../../actions/info';
+import { employeeInfoStartUpdate } from '../../actions/info';
 import { useForm } from '../../hooks/useForm';
 import { Aside } from '../ui/Aside';
 import { Loading } from '../ui/Loading';
