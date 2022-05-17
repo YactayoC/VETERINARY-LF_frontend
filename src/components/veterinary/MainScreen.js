@@ -5,10 +5,13 @@ import { Footer } from '../ui/Footer';
 import { Hero } from '../ui/Hero';
 import { NavBar } from '../ui/NavBar';
 import { Testimonial } from './Testimonial';
+import LoaderTestimonial from '../../loader/LoaderTestimonial';
+
+const arrayTest = [1, 2, 3, 4];
 
 export const MainScreen = () => {
   const dispatch = useDispatch();
-  const testimonialsAll = useSelector((state) => state.testimonials.testimonialsAll);
+  const { testimonialsAll, status } = useSelector((state) => state.testimonials);
 
   useEffect(() => {
     dispatch(testimonialStartLoadingAll());
@@ -108,7 +111,8 @@ export const MainScreen = () => {
       </section>
 
       <section className="testimonials__grid animate__animated animate__fadeIn">
-        {testimonialsAll ? (
+        {!status && arrayTest.map(() => <LoaderTestimonial key={crypto.randomUUID()} />)}
+        {status && testimonialsAll ? (
           <>
             {testimonialsAll.map((testimonial) => (
               <Testimonial key={testimonial._id} {...testimonial} />

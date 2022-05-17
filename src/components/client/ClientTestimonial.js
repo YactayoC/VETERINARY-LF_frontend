@@ -21,7 +21,7 @@ const initialState = {
 
 export const ClientTestimonial = () => {
   const dispatch = useDispatch();
-  const { data, testimonials } = useSelector((state) => state.testimonials);
+  const { status, testimonials } = useSelector((state) => state.testimonials);
   const { activeTestimonial } = useSelector((state) => state.testimonials);
 
   const [formValues, handleInputChange, reset] = useForm(initialState);
@@ -95,7 +95,7 @@ export const ClientTestimonial = () => {
               <li className="appointment-data__datas-element">Remove</li>
             </ul>
 
-            {data && testimonials.length >= 1 ? (
+            {status && testimonials.length >= 1 ? (
               <>
                 {testimonials.map((testimoniale) => (
                   <Item key={testimoniale._id} {...testimoniale} type="testimonial" />

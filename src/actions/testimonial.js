@@ -98,17 +98,18 @@ export const testimonialStartLoadingAll = () => {
     try {
       const resp = await fetchNotToken('testimonial/getTestimonialsAll');
       const body = await resp.json();
+      const status = body.ok;
       const testimonials = body.testimonials;
-      dispatch(testimonialsLoadedAll(testimonials));
+      dispatch(testimonialsLoadedAll(testimonials, status));
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-const testimonialsLoadedAll = (testimonials) => ({
+const testimonialsLoadedAll = (testimonials, status) => ({
   type: types.testimonialLoadedAll,
-  payload: testimonials,
+  payload: { testimonials, status },
 });
 
 export const adminTestimonialsStartLoading = () => {

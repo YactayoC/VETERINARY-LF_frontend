@@ -1,7 +1,7 @@
 import { types } from '../types/types';
 
 const initialState = {
-  data: false,
+  status: null,
   testimonials: [],
   testimonialsAll: [],
   activeTestimonial: null,
@@ -18,7 +18,7 @@ export const testimonialReducer = (state = initialState, action) => {
     case types.testimonialLoaded:
       return {
         ...state,
-        data: true,
+        status: true,
         testimonials: [...action.payload],
       };
 
@@ -55,7 +55,8 @@ export const testimonialReducer = (state = initialState, action) => {
     case types.testimonialLoadedAll:
       return {
         ...state,
-        testimonialsAll: [...action.payload],
+        status: action.payload.status,
+        testimonialsAll: [...action.payload.testimonials],
       };
 
     default:

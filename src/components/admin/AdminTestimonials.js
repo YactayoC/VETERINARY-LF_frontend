@@ -7,7 +7,7 @@ import { Item } from '../ui/Item';
 
 export const AdminTestimonials = () => {
   const dispatch = useDispatch();
-  const { data, testimonials } = useSelector((state) => state.testimonials);
+  const { status, testimonials } = useSelector((state) => state.testimonials);
 
   useEffect(() => {
     dispatch(adminTestimonialsStartLoading());
@@ -29,7 +29,7 @@ export const AdminTestimonials = () => {
               <li className="appointment-data__datas-element">Remove</li>
             </ul>
 
-            {data && testimonials.length >= 1 ? (
+            {status && testimonials.length >= 1 ? (
               <>
                 {testimonials.map((testimoniale) => (
                   <Item key={testimoniale._id} {...testimoniale} type="testimonial" />
