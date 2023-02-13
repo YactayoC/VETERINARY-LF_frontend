@@ -1,31 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { LocalStorageTypes, Auth } from '@/models';
-import { getLocalStorage, setLocalStorage } from '@/utils';
+import { setLocalStorage, clearLocalStorage } from '@/utils';
+import { Role } from '@/models/role';
 
 const initialState: Auth = {
-  ok: false,
   uid: '',
   fullname: '',
-  type: 'user',
+  role: Role.CLIENT,
   token: '',
 };
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: getLocalStorage(LocalStorageTypes.AUTH)
-    ? JSON.parse(getLocalStorage(LocalStorageTypes.AUTH) as string)
-    : initialState,
+  initialState: initialState,
 
   reducers: {
     login: (state, action) => {
-      setLocalStorage(LocalStorageTypes.AUTH, action.payload);
+      setLocalStorage(LocalStorageTypes.TOKEN, action.payload.token);
       return action.payload;
     },
     register: (state, action) => {
       return state;
     },
+    logout: () => {
+      clearLocalStorage();
+      return initialState;
+    },
+    revalidateAuth: (state, action) => {
+      setLocalStorage(LocalStorageTypes.TOKEN, action.payload.token);
+      return action.payload;
+    },
   },
 });
 
-export const { login, register } = authSlice.actions;
+export const { login, register, logout, revalidateAuth } = authSlice.actions;

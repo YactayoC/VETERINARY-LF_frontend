@@ -1,3 +1,3 @@
 export enum LocalStorageTypes {
-  AUTH = 'auth',
+  TOKEN = 'token',
 }

@@ -1,0 +1,160 @@
+@use '../abstracts/mixins' as m;
+
+header {
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+
+  @include m.phone {
+    position: fixed;
+  }
+}
+
+.nav {
+  align-items: center;
+  background-color: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  height: 5rem;
+  overflow: hidden;
+  transition: all 0.5s ease;
+
+  @include m.phone {
+    align-items: center;
+    flex-direction: row;
+    height: 7rem;
+    padding-inline: 4rem;
+  }
+}
+
+.nav__logo {
+  cursor: pointer;
+  width: 60px;
+
+  @include m.phone {
+    cursor: pointer;
+    width: 80px;
+  }
+}
+
+.nav__links {
+  display: none;
+  flex-direction: column;
+
+  @include m.phone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.nav__link {
+  color: $text;
+  font-size: 16px;
+  font-weight: 700;
+  padding-block: 0.8rem;
+  padding-inline: 2.5rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary;
+    color: $white;
+  }
+}
+
+.nav__link-home,
+.nav__link-auth {
+  color: $white;
+}
+
+.nav__link-active {
+  color: $white;
+  background-color: $primary;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+
+.nav__link-auth {
+  background-color: $black;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+
+  &:hover {
+    background-color: lighten($black, 40%);
+  }
+
+  @include m.phone {
+    width: auto;
+    margin-left: 1.5rem;
+  }
+}
+
+.nav__link-user {
+  background-color: $black;
+  transition: background-color 0.3s ease;
+  margin-left: 1.5rem;
+  color: $white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & p {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: lighten($black, 40%);
+  }
+}
+
+.nav__link-user--off {
+  color: rgb(255, 66, 66);
+  font-size: 1.2rem;
+}
+
+.nav__link-user--on {
+  color: $primary;
+  font-size: 1.2rem;
+}
+
+// Phone
+.nav__bar {
+  font-size: 1.5rem;
+  color: $primary;
+  cursor: pointer;
+  @include m.phone {
+    display: none;
+  }
+}
+
+.nav__phone {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-block: 1rem;
+  width: 100%;
+  @include m.phone {
+    display: none;
+  }
+}
+
+.nav__link--phone {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+}
+
+.nav-active--phone {
+  height: 23rem;
+}

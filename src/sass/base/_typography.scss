@@ -1,0 +1,71 @@
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f6f6f6;
+  user-select: none;
+  font-family: $font_text;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3 {
+  color: $heading;
+  font-family: $font_heading;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+h2,
+h3 {
+  font-weight: 700;
+}
+
+p {
+  color: $text;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.error-input {
+  color: $error;
+  font-weight: 500;
+  margin: 0;
+  position: absolute;
+  top: -1.5rem;
+}

@@ -1,0 +1,135 @@
+@use '../../abstracts/mixins' as m;
+
+.profile-data {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+
+  @include m.phone {
+    align-items: flex-start;
+    margin-left: 5rem;
+  }
+}
+
+.profile-data__general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  @include m.phone {
+    flex-direction: row;
+    justify-content: space-between;
+    width: max-content;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & i {
+      font-size: 1.1rem;
+    }
+  }
+
+  & button {
+    background-color: $primary;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 700;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    transition: background-color 0.3s ease;
+
+    & p {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}
+
+.profile-data__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 14rem;
+  max-height: 30rem;
+  overflow: auto;
+
+  @include m.phone {
+    width: 50rem;
+    max-width: 50rem;
+    overflow: unset;
+  }
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(190, 190, 190);
+    border-radius: 20px;
+    border: 3px solid rgb(255, 255, 255);
+  }
+}
+
+.profile-data__img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & img {
+    cursor: pointer;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+}
+
+.form-profile {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 2rem;
+
+  @include m.phone {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form__profile {
+  width: 100% !important;
+  @include m.phone {
+    width: 100% !important;
+  }
+}
+
+.profile-data__form {
+  @include m.phone {
+    width: 100%;
+  }
+}

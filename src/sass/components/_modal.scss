@@ -1,0 +1,59 @@
+@use '../abstracts/mixins' as m;
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 0.5);
+  z-index: 100;
+  opacity: 1;
+}
+
+.modal__hide {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 80%;
+
+  @include m.phone {
+    width: 40%;
+  }
+}
+
+.modal__form {
+  width: 100%;
+}
+
+.modal__title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  & i {
+    font-size: 1.8rem;
+    color: rgb(248, 60, 60);
+    cursor: pointer;
+  }
+}
+
+.form__add {
+  width: 100%;
+}
+
+.form__submit-add {
+  width: 100%;
+}

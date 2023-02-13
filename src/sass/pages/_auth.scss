@@ -1,0 +1,103 @@
+@use '../abstracts/mixins' as m;
+
+.auth {
+  align-items: center;
+  background-image: url(/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  height: 100vh;
+  justify-items: center;
+  position: relative;
+
+  @include m.phone {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.auth__img img {
+  display: none;
+
+  @include m.phone {
+    display: block;
+    width: 85%;
+    margin-left: 4rem;
+  }
+}
+
+.back__home {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  left: 1rem;
+  position: absolute;
+  top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  & {
+    color: $text;
+  }
+}
+
+.loading {
+  align-items: center;
+  background-image: url(/assets/ui/background.jpg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.loading-img {
+  width: 40rem;
+}
+
+.loading-text {
+  color: $white;
+  letter-spacing: 5px;
+  font-size: 3rem;
+  font-weight: 700;
+
+  @include m.phone {
+    font-size: 4rem;
+    letter-spacing: 10px;
+  }
+}
+
+// Confirm Token
+.confirm {
+  align-items: center;
+  background-image: url(/assets/auth/background.png);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__text {
+    margin: 0;
+    font-weight: 900;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &__link {
+    background-color: #4b9af5;
+    color: $white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 2rem;
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(#4b9af5, 10%);
+    }
+  }
+}

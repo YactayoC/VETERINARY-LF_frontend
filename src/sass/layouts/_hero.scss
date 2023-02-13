@@ -1,0 +1,82 @@
+@use '../abstracts/mixins' as m;
+
+// Home
+.hero {
+  background-image: url(/assets/ui/background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding-top: 2rem;
+
+  @include m.phone {
+    margin-top: 5rem;
+  }
+}
+
+.hero__title {
+  color: $white;
+  font-size: 2rem;
+  text-align: center;
+
+  @include m.phone {
+    font-size: 4rem;
+  }
+}
+
+.hero__district {
+  color: $text;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hero__div-img {
+  bottom: 0;
+  width: 100%;
+}
+
+.hero__img {
+  width: 100%;
+}
+
+// Services
+.hero-services {
+  background-image: linear-gradient(rgb(0 0 0 /0.5), rgb(0 0 0 /0.5)), url(/assets/ui/hero.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding-top: 2rem;
+  width: 100vw;
+  height: 30rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include m.phone {
+    width: auto;
+    margin-top: 5rem;
+  }
+}
+
+//Contact
+.hero-contact {
+  background-image: linear-gradient(rgb(0 0 0 /0.5), rgb(0 0 0 /0.5)), url(/assets/ui/hero-cat.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding-top: 2rem;
+  width: 100vw;
+  height: 30rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include m.phone {
+    width: auto;
+    margin-top: 5rem;
+  }
+}

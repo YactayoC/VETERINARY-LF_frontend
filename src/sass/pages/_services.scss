@@ -1,0 +1,123 @@
+@use '../abstracts/mixins' as m;
+
+.section__services {
+  max-width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  gap: 5rem;
+}
+
+.section__services-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 2rem;
+  gap: 1rem;
+
+  @include m.phone {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-inline: 6rem;
+    justify-items: center;
+    flex-direction: row;
+    gap: 4rem;
+
+    &:nth-child(even) {
+      .section__services-img {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+      .section__services-info {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+    }
+  }
+}
+
+.section__services-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section__services-img {
+  display: none;
+
+  @include m.phone {
+    display: flex;
+    width: auto;
+  }
+}
+
+.section__services-img--1 {
+  width: 18rem;
+}
+.section__services-img--2 {
+  width: 15rem;
+}
+.section__services-img--3 {
+  width: 28rem;
+}
+.section__services-img--4 {
+  width: 30rem;
+}
+.section__services-img--5 {
+  width: 25rem;
+}
+.section__services-img--6 {
+  width: 35rem;
+  height: 30rem;
+}
+
+.section__services-div h2 {
+  color: $text;
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.section__services-div p {
+  font-size: 1.1rem;
+  line-height: 2;
+}
+
+.section__services-div button {
+  background-color: $primary;
+  border: none;
+  color: $white;
+  padding-block: 0.8rem;
+  padding-inline: 1rem;
+  transition: background-color 0.3s ease;
+  width: 50%;
+  font-weight: 700;
+
+  @include m.phone {
+    width: 10rem;
+  }
+
+  &:hover {
+    background-color: darken($primary, 10%);
+    color: $white;
+  }
+}
+
+.section__services-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section__services-info ul li {
+  line-height: 2;
+  font-size: 1.1rem;
+
+  &::before {
+    font-family: 'FontAwesome';
+    content: '\f1b0';
+    color: $primary;
+    margin-right: 1rem;
+  }
+}

@@ -1,0 +1,76 @@
+@use '../../abstracts/mixins' as m;
+
+.data {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+
+  @include m.phone {
+    align-items: flex-start;
+    margin-left: 5rem;
+  }
+}
+
+.data__general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  @include m.phone {
+    flex-direction: row;
+    justify-content: space-between;
+    width: max-content;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & i {
+      font-size: 1.1rem;
+    }
+  }
+
+  & button {
+    background-color: $primary;
+    border: none;
+    color: $white;
+    display: flex;
+    gap: 0.5rem;
+    font-weight: 700;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    cursor: pointer;
+    transition: background-color 0.5s linear;
+
+    & p {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+
+    &:disabled {
+      background-color: lighten($primary, 20%);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.no-results {
+  margin: 0 auto;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  font-weight: 700;
+}

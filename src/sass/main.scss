@@ -1,0 +1,28 @@
+// Abstract
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+// Base
+@import './base/reset';
+@import './base/typography';
+
+// Components
+@import './components/modal';
+@import './components/loader';
+
+// Layouts
+@import './layouts/aside';
+@import './layouts/footer';
+@import './layouts/form';
+@import './layouts/hero';
+@import './layouts/navbar';
+
+// Pages
+@import './pages/auth';
+@import './pages/home';
+@import './pages/services';
+@import './pages/private/appointment';
+@import './pages/private/employee';
+@import './pages/private/general';
+@import './pages/private/profile';
+@import './pages/private/testimonial';

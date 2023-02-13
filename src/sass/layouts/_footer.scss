@@ -1,0 +1,196 @@
+@use '../abstracts/mixins' as m;
+
+.footer {
+  background-color: #3d434c;
+  margin-top: 4rem;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding: 4rem;
+  gap: 4rem;
+
+  @include m.phone {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8rem;
+  }
+}
+
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+
+  @include m.phone {
+    align-items: flex-start;
+    text-align: unset;
+  }
+
+  & img {
+    width: 20%;
+  }
+
+  & p {
+    color: #a1a4aa;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+
+  &-buttons {
+    display: flex;
+    gap: 0.8rem;
+
+    & a {
+      background-color: $white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: darken($white, 30%);
+        transform: scale(1.1);
+      }
+    }
+
+    & a img {
+      width: 1.5rem;
+    }
+  }
+}
+
+.footer__schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & h4 {
+    font-size: 1.5rem;
+    color: $white;
+    margin-bottom: 2rem;
+    position: relative;
+    text-align: center;
+
+    @include m.phone {
+      text-align: unset;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -1rem;
+      height: 0.2rem;
+      width: 4.5rem;
+      background-color: darken(#a1a4aa, 10%);
+      margin: 0 auto;
+      right: 0;
+      left: 0;
+
+      @include m.phone {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -1rem;
+        right: unset;
+        left: unset;
+        height: 0.2rem;
+        width: 4.5rem;
+        background-color: darken(#a1a4aa, 10%);
+      }
+    }
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & li {
+    color: #a1a4aa;
+    font-size: 1.2rem;
+  }
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & h4 {
+    font-size: 1.5rem;
+    color: $white;
+    margin-bottom: 2rem;
+    position: relative;
+    text-align: center;
+
+    @include m.phone {
+      text-align: unset;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -1rem;
+      height: 0.2rem;
+      width: 4.5rem;
+      background-color: darken(#a1a4aa, 10%);
+      margin: 0 auto;
+      right: 0;
+      left: 0;
+
+      @include m.phone {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -1rem;
+        right: unset;
+        left: unset;
+        height: 0.2rem;
+        width: 4.5rem;
+        background-color: darken(#a1a4aa, 10%);
+      }
+    }
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & li a {
+    color: $white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  & i {
+    color: #a1a4aa;
+    padding-right: 1rem;
+  }
+}
+
+.footer__copyrigth {
+  background-color: #343941;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding-block: 1rem;
+  text-align: center;
+
+  & p {
+    color: $placeholder;
+  }
+}

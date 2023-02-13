@@ -1,6 +1,6 @@
 export const PublicRoutes = {
-  LOGIN: 'login',
-  REGISTER: 'register',
+  LOGIN: 'auth/login',
+  REGISTER: 'auth/register',
   HOME: '/',
   SERVICES: 'services',
   CONTACT: 'contact',
@@ -14,8 +14,8 @@ export const PrivateRoutesEmployee = {
   PROFILE: 'dashboard/profile',
 };
 
-export const PrivateRoutesUser = {
-  APPOINTMENTS: 'user/appointments',
-  TESTIMONIALS: 'user/testimonial',
-  PROFILE: 'user/profile',
+export const PrivateRoutesClient = {
+  APPOINTMENTS: 'client/appointments',
+  TESTIMONIALS: 'client/testimonial',
+  PROFILE: 'client/profile',
 };

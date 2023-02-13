@@ -1,0 +1,285 @@
+@use '../abstracts/mixins' as m;
+
+// About
+.about__grid {
+  display: grid;
+  margin-top: 2rem;
+  grid-template-columns: repeat(1, 10px);
+  gap: 1rem;
+  max-width: 100vw;
+  align-items: center;
+
+  @include m.phone {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+    margin-top: 5rem;
+    margin-inline: 5rem;
+  }
+}
+
+.about__welcome {
+  width: 100vw;
+  text-align: center;
+
+  @include m.phone {
+    text-align: unset;
+    width: auto;
+  }
+}
+
+.about__welcome-title {
+  color: $text;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  text-align: center;
+
+  @include m.phone {
+    text-align: left;
+  }
+}
+
+.about__welcome-text {
+  color: $text;
+  font-size: 1.1rem;
+  line-height: 2;
+  padding-inline: 1rem;
+
+  @include m.phone {
+    padding: 0;
+  }
+}
+
+.about__welcome-hours {
+  color: $text;
+  margin-top: 1.5rem;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 1rem;
+
+  @include m.phone {
+    padding: 0;
+  }
+}
+
+.about__data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white;
+  width: 100vw;
+
+  @include m.phone {
+    width: auto;
+    color: $white;
+  }
+}
+
+.about__data-phone,
+.about__data-email {
+  width: 100%;
+  padding-block: 1.5rem;
+}
+
+.about__data-phone {
+  background-color: $primary;
+  display: flex;
+  align-items: center;
+  padding-inline: 2rem;
+  gap: 2rem;
+}
+
+.about__data-phone p,
+.about__data-phone h3,
+.about__data-email p,
+.about__data-email h3 {
+  color: $white;
+  font-size: 0.9rem;
+
+  @include m.phone {
+    font-size: 1.2rem;
+  }
+}
+
+.about__data-phone h3,
+.about__data-email h3 {
+  font-size: 1.2rem;
+
+  @include m.phone {
+    font-size: 2.3rem;
+  }
+}
+
+.about__data-email {
+  background-color: #3d434c;
+  display: flex;
+  align-items: center;
+  padding-inline: 2rem;
+  gap: 2rem;
+}
+
+.about__data-icon {
+  font-size: 2.3rem;
+}
+
+.about__data-icon-home {
+  color: darken($primary, 1%);
+  font-size: 2.3rem;
+}
+
+// Services
+.services__grid {
+  margin-top: 4rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin-inline: 5rem;
+
+  @include m.phone {
+    margin-top: 8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    margin-inline: 5rem;
+  }
+}
+
+.services__info {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:hover .services__text {
+    color: $primary;
+  }
+}
+
+.services__icon {
+  background-color: transparent;
+  color: $primary;
+  font-size: 6rem;
+}
+
+.services__text {
+  color: $black;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+// Delivery
+.delivery {
+  align-items: center;
+  background-image: url(/assets/ui/section.png);
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  padding-block: 6rem;
+}
+
+.delivery h2 {
+  color: $white;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 4rem;
+  text-align: center;
+
+  @include m.phone {
+    text-align: unset;
+  }
+}
+
+.delivery p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-inline: 4rem;
+  width: auto;
+  line-height: 2;
+
+  @include m.phone {
+    width: 50rem;
+  }
+}
+
+// Testimonials
+.testimonials__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding-inline: 2rem;
+
+  @include m.phone {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.testimonial__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonial__card-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  background-color: $white;
+  padding-top: 2rem;
+  padding-inline: 2rem;
+  max-width: 70%;
+  position: relative;
+}
+
+.testimonial__card-text p {
+  line-height: 2;
+  font-size: 1.1rem;
+}
+
+.testimonial__quote {
+  position: absolute;
+  left: 10px;
+  font-size: 1.2rem;
+  color: $primary;
+}
+
+.testimonial__card-author {
+  align-items: center;
+  background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  overflow: hidden;
+  padding-block: 1rem;
+  width: 100%;
+}
+
+.testimonial__card-author img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.testimonial__card-author h3 {
+  color: $white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}

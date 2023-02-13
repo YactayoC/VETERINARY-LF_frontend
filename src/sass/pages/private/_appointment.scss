@@ -1,0 +1,102 @@
+@use '../../abstracts/mixins' as m;
+
+.appointment {
+  background-image: url(/assets/auth/background.png);
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+.appoitment-data__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $white;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 14rem;
+  max-height: 20rem;
+  overflow: auto;
+  flex-wrap: wrap;
+
+  @include m.phone {
+    width: 65rem;
+    max-width: 65rem;
+  }
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(190, 190, 190);
+    border-radius: 20px;
+    border: 3px solid rgb(255, 255, 255);
+  }
+}
+
+.appointment-data__info p {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.appointment-data__datas {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-data__datas-data,
+.appointment-data__datas-header {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  gap: 3rem;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @include m.phone {
+    grid-template-columns: repeat(6, 125px);
+    gap: 3rem;
+  }
+}
+
+.appointment-data__datas-header-admin,
+.appointment-data__datas-data-admin {
+  grid-template-columns: repeat(7, 60px);
+
+  @include m.phone {
+    grid-template-columns: repeat(7, 125px);
+  }
+}
+
+.appointment-data__datas-element {
+  text-align: center;
+  cursor: pointer;
+}
+
+.appointment-data__datas-header {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.element-edit,
+.element-remove {
+  cursor: unset;
+}
+
+.element-edit {
+  color: rgb(31, 142, 245);
+  font-size: 1.1rem;
+}
+
+.element-remove {
+  color: red;
+  font-size: 1.4rem;
+}

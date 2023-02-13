@@ -1,0 +1,141 @@
+@use '../abstracts/mixins' as m;
+
+.aside {
+  align-items: center;
+  background-color: $white;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 3rem;
+  height: 100vh;
+  max-width: 90px;
+  transition: max-width 0.5s ease;
+
+  position: relative;
+  z-index: 100;
+  box-shadow: 10px 0px 20px 2px rgb(0 0 0 / 10%);
+}
+
+.aside-show {
+  width: 210px;
+  max-width: 210px;
+
+  & .aside__title {
+    font-size: 1.2rem;
+  }
+
+  & .aside__nav-link {
+    gap: 2rem;
+    width: 100%;
+  }
+
+  & .aside__profile img {
+    height: 5rem;
+    width: 5rem;
+  }
+}
+
+.aside__hamburger {
+  color: $black;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  right: -3rem;
+  top: 1.5rem;
+}
+
+.aside__hamburger-home {
+  color: $primary;
+  top: 4rem;
+  right: -3.2rem;
+}
+
+.aside__title {
+  display: none;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  transition: font-size 0.5s ease;
+
+  @include m.phone {
+    display: flex;
+    font-size: 0.6rem;
+  }
+}
+
+.aside__title-text {
+  background: linear-gradient(to right, #aaffa9, #11ffbd);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.aside__title-text-admin {
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.aside__profile {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  @include m.phone {
+    margin-top: 0;
+  }
+
+  & img {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  & h3 {
+    color: $text;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+}
+
+.aside__nav {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  overflow: hidden;
+
+  & a {
+    display: flex;
+    align-items: center;
+    gap: 2.3rem;
+    color: #808080;
+    width: 100%;
+
+    & i {
+      font-size: 1.5rem;
+    }
+
+    & p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.aside__nav-link {
+  margin-left: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.aside__nav-link--active {
+  background-color: $primary;
+  border-radius: 0.5rem 0px 0px 0.5rem;
+
+  & i,
+  p {
+    color: white;
+    font-weight: 700;
+  }
+}
