@@ -5,6 +5,7 @@ export interface Auth {
   fullname: string;
   role: Role;
   token: string;
+  isAuthLoaded?: boolean;
 }
 
 export interface AuthLogin {

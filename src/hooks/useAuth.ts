@@ -31,7 +31,6 @@ export const useAuth = () => {
     try {
       const dataAuth = await revalidateTokenService();
       dispatch(revalidateAuth(dataAuth));
-      return { hasError: false, data: dataAuth };
     } catch (error) {
       return { hasError: true, errorMessage: error.response.data.msg };
     }

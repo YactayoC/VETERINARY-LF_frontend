@@ -8,14 +8,25 @@ export const PublicRoutes = {
 };
 
 export const PrivateRoutesEmployee = {
-  APPOINTMENTS: 'dashboard/appointments',
-  TESTIMONIALS: 'dashboard/testimonial',
-  EMPLOYEES: 'dashboard/employees',
-  PROFILE: 'dashboard/profile',
+  PRIVATEEMPLOYEE: 'dashboard',
+  APPOINTMENTS: 'appointments',
+  TESTIMONIALS: 'testimonial',
+  EMPLOYEES: 'employees',
+  PROFILE: 'profile',
+
+  LINK_APPOINTMENTS: 'dashboard/appointments',
+  LINK_TESTIMONIALS: 'dashboard/testimonial',
+  LINK_EMPLOYEES: 'dashboard/employees',
+  LINK_PROFILE: 'dashboard/profile',
 };
 
 export const PrivateRoutesClient = {
-  APPOINTMENTS: 'client/appointments',
-  TESTIMONIALS: 'client/testimonial',
-  PROFILE: 'client/profile',
+  PRIVATECLIENT: 'client/*',
+  APPOINTMENTS: 'appointments',
+  TESTIMONIALS: 'estimonial',
+  PROFILE: 'profile',
+
+  LINK_APPOINTMENTS: 'client/appointments',
+  LINK_TESTIMONIALS: 'client/testimonial',
+  LINK_PROFILE: 'client/profile',
 };

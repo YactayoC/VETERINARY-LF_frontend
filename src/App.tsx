@@ -14,6 +14,7 @@ const Services = lazy(() => import('./pages/Services/Services'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const Register = lazy(() => import('./pages/Auth/Register'));
+
 const PrivateEmployee = lazy(() => import('./pages/Private/Employee/PrivateEmployee'));
 const PrivateClient = lazy(() => import('./pages/Private/Client/PrivateClient'));
 
@@ -32,12 +33,12 @@ function App() {
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
               <Route path={PublicRoutes.REGISTER} element={<Register />} />
 
-              <Route element={<RoleGuard role={Role.EMPLOYEE} />}>
+              <Route element={<RoleGuard privateValidation={true} role={Role.EMPLOYEE} />}>
                 <Route path={PrivateRoutesEmployee.APPOINTMENTS} element={<PrivateEmployee />} />
               </Route>
 
-              <Route element={<RoleGuard role={Role.CLIENT} />}>
-                <Route path={PrivateRoutesClient.APPOINTMENTS} element={<PrivateClient />} />
+              <Route element={<RoleGuard privateValidation={true} role={Role.CLIENT} />}>
+                <Route path={PrivateRoutesClient.PRIVATECLIENT} element={<PrivateClient />} />
               </Route>
             </RoutesWith404>
           </BrowserRouter>

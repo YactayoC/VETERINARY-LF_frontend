@@ -1,7 +1,9 @@
-import { useAuth } from '@/hooks';
-import { AppStore } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+
+import { useAuth } from '@/hooks';
+import { PrivateRoutesClient, PrivateRoutesEmployee, PublicRoutes } from '@/models';
+import { AppStore } from '@/redux/store';
 
 const Navbar = () => {
   const { fullname, role, uid } = useSelector((state: AppStore) => state.auth);
@@ -24,13 +26,19 @@ const Navbar = () => {
         </Link>
 
         <div className="nav__links">
-          <NavLink className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')} to="/">
+          <NavLink className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')} to={PublicRoutes.HOME}>
             Home
           </NavLink>
-          <NavLink className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')} to="/services">
+          <NavLink
+            className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')}
+            to={`/${PublicRoutes.SERVICES}`}
+          >
             Services
           </NavLink>
-          <NavLink className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')} to="/contact">
+          <NavLink
+            className={({ isActive }) => 'nav__link ' + (isActive && 'nav__link-active')}
+            to={`/${PublicRoutes.CONTACT}`}
+          >
             Contact
           </NavLink>
 
@@ -38,23 +46,27 @@ const Navbar = () => {
             <>
               <Link
                 className="nav__link nav__link-user"
-                to={role === 'client' ? '/profile/settings' : '/dashboard/appointments'}
+                to={
+                  role === 'client'
+                    ? `/${PrivateRoutesClient.LINK_APPOINTMENTS}`
+                    : `/${PrivateRoutesEmployee.APPOINTMENTS}`
+                }
               >
                 <i className="fa-solid fa-user nav__link-user--on"></i>
                 <p>{fullname}</p>
               </Link>
-              <Link className="nav__link nav__link-user" to="/auth/login" onClick={onLogout}>
+              <Link className="nav__link nav__link-user" to={`/${PublicRoutes.LOGIN}`} onClick={onLogout}>
                 <i className="fa-solid fa-power-off nav__link-user--off"></i>
                 <p>Logout</p>
               </Link>
             </>
           ) : (
             <>
-              <Link className="nav__link nav__link-auth" to="/auth/login">
+              <Link className="nav__link nav__link-auth" to={`/${PublicRoutes.LOGIN}`}>
                 Log In
               </Link>
 
-              <Link className="nav__link nav__link-auth" to="/auth/register">
+              <Link className="nav__link nav__link-auth" to={`/${PublicRoutes.REGISTER}`}>
                 Sign Up
               </Link>
             </>
@@ -69,19 +81,19 @@ const Navbar = () => {
         <div className="nav__links nav__phone">
           <NavLink
             className={({ isActive }) => 'nav__link nav__link--phone ' + (isActive && 'nav__link-active')}
-            to="/"
+            to={PublicRoutes.HOME}
           >
             Home
           </NavLink>
           <NavLink
             className={({ isActive }) => 'nav__link nav__link--phone ' + (isActive && 'nav__link-active')}
-            to="/services"
+            to={`/${PublicRoutes.SERVICES}`}
           >
             Services
           </NavLink>
           <NavLink
             className={({ isActive }) => 'nav__link nav__link--phone ' + (isActive && 'nav__link-active')}
-            to="/contact"
+            to={`/${PublicRoutes.CONTACT}`}
           >
             Contact
           </NavLink>
@@ -90,23 +102,29 @@ const Navbar = () => {
             <>
               <Link
                 className="nav__link nav__link--phone nav__link-user"
-                to={role === 'client' ? '/profile/settings' : '/dashboard/appointments'}
+                to={
+                  role === 'client' ? `/${PrivateRoutesClient.APPOINTMENTS}` : `/${PrivateRoutesEmployee.APPOINTMENTS}`
+                }
               >
                 <i className="fa-solid fa-user nav__link-user--on"></i>
                 <p>{fullname}</p>
               </Link>
 
-              <Link className="nav__link nav__link--phone nav__link-user" to="/auth/login" onClick={onLogout}>
+              <Link
+                className="nav__link nav__link--phone nav__link-user"
+                to={`/${PublicRoutes.LOGIN}`}
+                onClick={onLogout}
+              >
                 <i className="fa-solid fa-power-off nav__link-user--off"></i>
                 <p>Logout</p>
               </Link>
             </>
           ) : (
             <>
-              <Link className="nav__link nav__link-auth" to="/auth/login">
+              <Link className="nav__link nav__link-auth" to={`/${PublicRoutes.LOGIN}`}>
                 Log In
               </Link>
-              <Link className="nav__link nav__link-auth" to="/auth/register">
+              <Link className="nav__link nav__link-auth" to={`/${PublicRoutes.REGISTER}`}>
                 Sign Up
               </Link>
             </>

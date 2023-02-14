@@ -7,7 +7,7 @@ import { Role } from '@/models/role';
 const initialState: Auth = {
   uid: '',
   fullname: '',
-  role: Role.CLIENT,
+  role: Role.NONE,
   token: '',
 };
 
