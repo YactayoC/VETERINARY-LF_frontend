@@ -9,17 +9,23 @@ export interface Appointment {
   symptom: string;
   date: Date;
   state: string;
-  client: Client;
-  __v: number;
+  client: ClientInAppointment;
 }
 
 export interface AddAppointment {
   mascot: string;
   symptom: string;
-  date: string;
+  date: Date;
+  id?: string;
 }
 
-interface Client {
+interface ClientInAppointment {
   _id: string;
   fullname: string;
+}
+
+export interface RequestUpdateAppointment extends Appointment {}
+
+export interface ResponseUpdateAppointment extends Appointment {
+  msg?: string;
 }

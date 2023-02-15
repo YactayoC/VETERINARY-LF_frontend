@@ -1,11 +1,20 @@
 import { Role } from './role';
 
 export interface Auth {
-  uid: string;
+  client: Client;
+  token: string | null;
+}
+
+export interface Client {
+  _id: string;
   fullname: string;
+  phone: string;
+  email: string;
+  password: string;
+  address: string;
+  key: string | null;
+  confirmed: boolean;
   role: Role;
-  token: string;
-  isAuthLoaded?: boolean;
 }
 
 export interface AuthLogin {
@@ -20,3 +29,5 @@ export interface AuthRegister {
   email: string;
   password: string;
 }
+
+export interface AuthProfile extends AuthRegister {}

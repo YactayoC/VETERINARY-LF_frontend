@@ -21,8 +21,8 @@ const PrivateClient = lazy(() => import('./pages/Private/Client/PrivateClient'))
 function App() {
   return (
     <>
-      <Suspense fallback={<Loader />}>
-        <Provider store={store}>
+      <Provider store={store}>
+        <Suspense fallback={<Loader />}>
           <BrowserRouter>
             <RoutesWith404>
               <Route path={PublicRoutes.HOME} element={<Home />} />
@@ -33,17 +33,17 @@ function App() {
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
               <Route path={PublicRoutes.REGISTER} element={<Register />} />
 
-              <Route element={<RoleGuard privateValidation={true} role={Role.EMPLOYEE} />}>
+              <Route element={<RoleGuard role={Role.EMPLOYEE} />}>
                 <Route path={PrivateRoutesEmployee.APPOINTMENTS} element={<PrivateEmployee />} />
               </Route>
 
-              <Route element={<RoleGuard privateValidation={true} role={Role.CLIENT} />}>
+              <Route element={<RoleGuard role={Role.CLIENT} />}>
                 <Route path={PrivateRoutesClient.PRIVATECLIENT} element={<PrivateClient />} />
               </Route>
             </RoutesWith404>
           </BrowserRouter>
-        </Provider>
-      </Suspense>
+        </Suspense>
+      </Provider>
     </>
   );
 }

@@ -4,18 +4,22 @@ import { useForm } from 'react-hook-form';
 
 import { Aside, Data, Item } from '@/components';
 import { AppStore } from '@/redux/store';
-import { useAppointment } from '@/hooks';
+import { useAppointment, useModal } from '@/hooks';
+import { SwalError, SwalSuccess } from '@/utils';
 
-export interface AddAppointment {
+interface AddAppointment {
   symptom: string;
-  date: string;
+  date: Date;
   mascot: string;
 }
 
 const AppointmentClientPage = () => {
   const { appointments, activeAppointment } = useSelector((state: AppStore) => state.appointments);
-  const { handleGetMyAppointments, handleAddAppointment, handleClearActiveAppointment } = useAppointment();
-  const [isModalActive, setIsModalActive] = useState(false);
+  const { isOpenModalAddAppointment, isOpenModalUpdateAppointment } = useSelector((state: AppStore) => state.modal);
+  const { handleOpenModalAddAppointment, handleOpenModalUpdateAppointment } = useModal();
+  const { handleGetMyAppointments, handleAddAppointment, handleSetDataActiveAppointment, handleUpdateAppointment } =
+    useAppointment();
+
   const {
     register,
     reset,
@@ -27,25 +31,38 @@ const AppointmentClientPage = () => {
     handleGetMyAppointments();
   }, []);
 
-  // const onCloseModal = () => {
-  //   const modal = document.querySelector('.modal');
-  //   modal!.classList.add('modal__hide');
-  //   handleClearActiveAppointment();
-  // };
+  useEffect(() => {
+    reset();
+  }, [activeAppointment]);
 
-  const onAddAppointment = (dataAppointmentAdd: AddAppointment) => {
-    handleAddAppointment(dataAppointmentAdd);
-    setIsModalActive(false);
+  const onAddAppointment = async (dataAppointmentAdd: AddAppointment) => {
+    const { hasError, msg } = await handleAddAppointment(dataAppointmentAdd);
+
+    if (hasError) {
+      SwalError(msg);
+    }
+
+    handleOpenModalAddAppointment(false);
+    SwalSuccess('Appointment added', msg);
     reset();
   };
 
-  // const onUpdate = () => {
-  //   if (isFormValidUpdate()) {
-  //     dispatch(appointmentStartUpdate(formValuesUpdate));
-  //     handleCloseModal();
-  //     reset(initialState);
-  //   }
-  // };
+  const onUpdateAppointment = async (dataAppointmentUpdate: AddAppointment) => {
+    const dataModifiedAppointmentUpdate = {
+      ...dataAppointmentUpdate,
+      id: activeAppointment?._id,
+    };
+    const { hasError, msg } = await handleUpdateAppointment(dataModifiedAppointmentUpdate);
+
+    if (hasError) {
+      SwalError(msg);
+    }
+
+    handleSetDataActiveAppointment(null);
+    handleOpenModalUpdateAppointment(false);
+    SwalSuccess('Appointment updated', msg);
+    reset();
+  };
 
   return (
     <div className="appointment">
@@ -78,11 +95,16 @@ const AppointmentClientPage = () => {
       </div>
 
       {!activeAppointment ? (
-        <div className={`modal  ${!isModalActive && 'modal__hide'}`}>
+        <div className={`modal  ${!isOpenModalAddAppointment ? 'modal__hide' : ''}`}>
           <div className="modal__info">
             <div className="modal__title">
               <h2>Add Appointment</h2>
-              <i className="fa-solid fa-rectangle-xmark" onClick={() => setIsModalActive(false)}></i>
+              <i
+                className="fa-solid fa-rectangle-xmark"
+                onClick={() => {
+                  handleOpenModalAddAppointment(false);
+                }}
+              ></i>
             </div>
             <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit(onAddAppointment)}>
               <div className="form__group form__add">
@@ -90,10 +112,12 @@ const AppointmentClientPage = () => {
                   className="form__input"
                   type="datetime-local"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('date', {
                     required: 'This field is required',
                   })}
                 />
+                {errors.date && <p className="error-input">{errors.date.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
@@ -101,75 +125,92 @@ const AppointmentClientPage = () => {
                   type="text"
                   placeholder="Name of the mascot"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('mascot', {
                     required: 'This field is required',
                   })}
                 />
+                {errors.mascot && <p className="error-input">{errors.mascot.message}</p>}
               </div>
               <div className="form__group form__add">
                 <textarea
                   className="form__input form__area"
                   placeholder="Tell us about the service you need"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('symptom', {
                     required: 'This field is required',
                     minLength: { value: 10, message: 'The symptom must be at least 10 characters long' },
                   })}
                 ></textarea>
+                {errors.symptom && <p className="error-input">{errors.symptom.message}</p>}
               </div>
               <div className="form__submit form__submit-add">
-                <button className="form__button">Add</button>
+                <button type="submit" className="form__button">
+                  Add
+                </button>
               </div>
             </form>
           </div>
         </div>
       ) : (
-        <></>
-        // <div className="modal modal__hide">
-        //   <div className="modal__info">
-        //     <div className="modal__title">
-        //       <h2>Update Appointment</h2>
-        //       <i className="fa-solid fa-rectangle-xmark" onClick={handleCloseModal}></i>
-        //     </div>
-        //     <form className="form animate__animated animate__fadeIn" onSubmit={handleUpdate}>
-        //       <div className="form__group form__add">
-        //         <input
-        //           className="form__input"
-        //           type="datetime-local"
-        //           name="date"
-        //           autoComplete="off"
-        //           value={formValuesUpdate.date}
-        //           onChange={handleInputChangeUpdate}
-        //         />
-        //       </div>
-        //       <div className="form__group form__add">
-        //         <input
-        //           className="form__input"
-        //           type="text"
-        //           placeholder="Name of the mascot"
-        //           name="mascot"
-        //           autoComplete="off"
-        //           value={formValuesUpdate.mascot}
-        //           onChange={handleInputChangeUpdate}
-        //         />
-        //       </div>
-        //       <div className="form__group form__add">
-        //         <textarea
-        //           className="form__input form__area"
-        //           placeholder="Tell us about the service you need"
-        //           type="text"
-        //           name="symptom"
-        //           autoComplete="off"
-        //           value={formValuesUpdate.symptom}
-        //           onChange={handleInputChangeUpdate}
-        //         ></textarea>
-        //       </div>
-        //       <div className="form__submit form__submit-add">
-        //         <button className="form__button">Update</button>
-        //       </div>
-        //     </form>
-        //   </div>
-        // </div>
+        <div className={`modal  ${!isOpenModalUpdateAppointment ? 'modal__hide' : ''}`}>
+          <div className="modal__info">
+            <div className="modal__title">
+              <h2>Update Appointment</h2>
+              <i
+                className="fa-solid fa-rectangle-xmark"
+                onClick={() => {
+                  handleOpenModalUpdateAppointment(false);
+                  handleSetDataActiveAppointment(null);
+                }}
+              ></i>
+            </div>
+            <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit(onUpdateAppointment)}>
+              <div className="form__group form__add">
+                <input
+                  className="form__input"
+                  type="datetime-local"
+                  autoComplete="off"
+                  defaultValue={new Date(activeAppointment.date).toISOString().slice(0, 16)}
+                  {...register('date', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.date && <p className="error-input">{errors.date.message}</p>}
+              </div>
+              <div className="form__group form__add">
+                <input
+                  className="form__input"
+                  type="text"
+                  placeholder="Name of the mascot"
+                  autoComplete="off"
+                  defaultValue={activeAppointment.mascot}
+                  {...register('mascot', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.mascot && <p className="error-input">{errors.mascot.message}</p>}
+              </div>
+              <div className="form__group form__add">
+                <textarea
+                  className="form__input form__area"
+                  placeholder="Tell us about the service you need"
+                  autoComplete="off"
+                  defaultValue={activeAppointment.symptom}
+                  {...register('symptom', {
+                    required: 'This field is required',
+                    minLength: { value: 10, message: 'The symptom must be at least 10 characters long' },
+                  })}
+                ></textarea>
+                {errors.symptom && <p className="error-input">{errors.symptom.message}</p>}
+              </div>
+              <div className="form__submit form__submit-add">
+                <button className="form__button">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );

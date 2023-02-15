@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { Appointments, Auth, Testimonial } from '@/models';
-import { appointmentSlice, authSlice, testimonialSlice } from './states';
+import { Appointments, Auth, Modal, Testimonials } from '@/models';
+import { appointmentSlice, authSlice, modalSlice, testimonialSlice } from './states';
 
 export interface AppStore {
   auth: Auth;
-  testimonials: Testimonial[];
+  testimonials: Testimonials;
   appointments: Appointments;
+  modal: Modal;
 }
 
 export default configureStore<AppStore>({
@@ -14,5 +15,6 @@ export default configureStore<AppStore>({
     auth: authSlice.reducer,
     testimonials: testimonialSlice.reducer,
     appointments: appointmentSlice.reducer,
+    modal: modalSlice.reducer,
   },
 });

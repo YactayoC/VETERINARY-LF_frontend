@@ -1,7 +1,19 @@
 import { useDispatch } from 'react-redux';
 
-import { loadTestimonials } from '@/redux/states';
-import { getTestimonialsService, removeTestimonialService } from '@/services';
+import {
+  addTestimonial,
+  loadTestimonial,
+  loadTestimonials,
+  removeTestimonial,
+  updateTestimonial,
+} from '@/redux/states';
+import {
+  addTestimonialService,
+  getMyTestimonialsService,
+  getTestimonialsService,
+  removeTestimonialService,
+  updateTestimonialService,
+} from '@/services';
 
 export const useTestimonial = () => {
   const dispath = useDispatch();
@@ -15,14 +27,50 @@ export const useTestimonial = () => {
     }
   };
 
-  const handleRemoveTestimonial = async (id: string) => {
+  const handleGetMyTestimonial = async () => {
     try {
-      const dataTestimonials = await removeTestimonialService(id);
-      dispath(loadTestimonials(dataTestimonials));
+      const dataTestimonial = await getMyTestimonialsService();
+      dispath(loadTestimonial(dataTestimonial.testimonial));
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { handleGetTestimonials, handleRemoveTestimonial };
+  const handleAddTestimonial = async (testimonial: string) => {
+    try {
+      const dataTestimonial = await addTestimonialService(testimonial);
+      dispath(addTestimonial(dataTestimonial.testimonial));
+      return { hasError: false, msg: dataTestimonial.msg };
+    } catch (error) {
+      return { hasError: true, msg: error.response.data.msg };
+    }
+  };
+
+  const handleUpddateTestimonial = async (id: string, testimonial: string) => {
+    try {
+      const dataTestimonial = await updateTestimonialService(id, testimonial);
+      dispath(updateTestimonial(dataTestimonial.testimonial));
+      return { hasError: false, msg: dataTestimonial.msg };
+    } catch (error) {
+      return { hasError: true, msg: error.response.data.msg };
+    }
+  };
+
+  const handleRemoveTestimonial = async (id: string) => {
+    try {
+      const dataTestimonial = await removeTestimonialService(id);
+      dispath(removeTestimonial(id));
+      return { hasError: false, msg: dataTestimonial.msg };
+    } catch (error) {
+      return { hasError: true, msg: error.response.data.msg };
+    }
+  };
+
+  return {
+    handleGetTestimonials,
+    handleGetMyTestimonial,
+    handleAddTestimonial,
+    handleUpddateTestimonial,
+    handleRemoveTestimonial,
+  };
 };

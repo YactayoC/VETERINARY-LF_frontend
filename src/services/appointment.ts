@@ -21,6 +21,14 @@ export const addAppointmentService = async (appointment: AddAppointment): Promis
   return data;
 };
 
+export const updateAppointmentService = async (appointment: AddAppointment): Promise<AppointmentResponse> => {
+  const { data } = await vetPrivateAPI.put<AppointmentResponse>(
+    `appointment/updateAppointment/${appointment.id}`,
+    appointment
+  );
+  return data;
+};
+
 export const removeAppointmentService = async (id: string): Promise<AppointmentResponse> => {
   const { data } = await vetPrivateAPI.delete<AppointmentResponse>(`appointment/deleteAppointment/${id}`);
   return data;

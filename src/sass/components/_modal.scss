@@ -27,6 +27,7 @@
   border-radius: 20px;
   padding: 2rem;
   width: 80%;
+  row-gap: 3rem;
 
   @include m.phone {
     width: 40%;

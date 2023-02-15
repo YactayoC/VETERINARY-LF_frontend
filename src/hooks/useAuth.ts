@@ -11,6 +11,7 @@ export const useAuth = () => {
     try {
       const dataAuth = await loginService(dataLogin);
       dispatch(login(dataAuth));
+      dispatch(revalidateAuth(dataAuth));
       return { hasError: false, data: dataAuth };
     } catch (error) {
       return { hasError: true, errorMessage: error.response.data.msg };
@@ -20,7 +21,7 @@ export const useAuth = () => {
   const handleRegister = async (dataRegister: AuthRegister) => {
     try {
       const dataAuth = await registerService(dataRegister);
-      dispatch(register(dataAuth));
+      dispatch(register());
       return { hasError: false, data: dataAuth };
     } catch (error) {
       return { hasError: true, errorMessage: error.response.data.msg };
@@ -31,6 +32,7 @@ export const useAuth = () => {
     try {
       const dataAuth = await revalidateTokenService();
       dispatch(revalidateAuth(dataAuth));
+      return { hasError: false, data: dataAuth };
     } catch (error) {
       return { hasError: true, errorMessage: error.response.data.msg };
     }

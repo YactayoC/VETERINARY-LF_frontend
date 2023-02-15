@@ -8,7 +8,7 @@ export const PublicRoutes = {
 };
 
 export const PrivateRoutesEmployee = {
-  PRIVATEEMPLOYEE: 'dashboard',
+  PRIVATEEMPLOYEE: 'dashboard/*',
   APPOINTMENTS: 'appointments',
   TESTIMONIALS: 'testimonial',
   EMPLOYEES: 'employees',
@@ -23,7 +23,7 @@ export const PrivateRoutesEmployee = {
 export const PrivateRoutesClient = {
   PRIVATECLIENT: 'client/*',
   APPOINTMENTS: 'appointments',
-  TESTIMONIALS: 'estimonial',
+  TESTIMONIALS: 'testimonial',
   PROFILE: 'profile',
 
   LINK_APPOINTMENTS: 'client/appointments',

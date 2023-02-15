@@ -24,8 +24,16 @@ export const appointmentSlice = createSlice({
     loadActiveAppointment: (state, action) => {
       return { ...state, activeAppointment: action.payload };
     },
-    clearActiveAppointment: (state) => {
-      return { ...state, activeAppointment: null };
+    setDataActiveAppointment: (state, action) => {
+      return { ...state, activeAppointment: action.payload };
+    },
+    updateAppointment: (state, action) => {
+      return {
+        ...state,
+        appointments: state.appointments.map((appointment) =>
+          appointment._id === action.payload._id ? action.payload : appointment
+        ),
+      };
     },
     removeAppointment: (state, action) => {
       return {
@@ -37,9 +45,11 @@ export const appointmentSlice = createSlice({
 });
 
 export const {
+  addAppointment,
   loadAppointments,
   loadMyAppointments,
   loadActiveAppointment,
-  clearActiveAppointment,
+  setDataActiveAppointment,
+  updateAppointment,
   removeAppointment,
 } = appointmentSlice.actions;

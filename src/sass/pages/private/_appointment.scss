@@ -2,7 +2,7 @@
 
 .appointment {
   background-image: url(/assets/auth/background.png);
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   display: flex;
 }
@@ -22,8 +22,8 @@
   flex-wrap: wrap;
 
   @include m.phone {
-    width: 65rem;
-    max-width: 65rem;
+    width: 70rem;
+    max-width: 70rem;
   }
 
   &::-webkit-scrollbar {

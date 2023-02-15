@@ -1,3 +1,4 @@
+import { useModal } from '@/hooks';
 import { AppStore } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -8,14 +9,9 @@ interface Props {
 }
 
 const Data = ({ title, button }: Props) => {
-  const testimonialState = useSelector((state: AppStore) => state.testimonials);
+  const { testimonials, myTestimonial } = useSelector((state: AppStore) => state.testimonials);
   const { pathname } = useLocation();
-
-  // TODO: mannejar modal con estados globales
-  const handleOpenModal = () => {
-    const modal = document.querySelector('.modal');
-    modal!.classList.remove('modal__hide');
-  };
+  const { handleOpenModalAddAppointment, handleOpenModalAddTestimonial } = useModal();
 
   if (title === 'Appointments') {
     return (
@@ -25,7 +21,7 @@ const Data = ({ title, button }: Props) => {
           <h3>{title}</h3>
         </div>
         {pathname.includes('client') && (
-          <button onClick={handleOpenModal}>
+          <button onClick={() => handleOpenModalAddAppointment(true)}>
             <i className="fa-solid fa-circle-plus"></i>
             <p>{button}</p>
           </button>
@@ -41,7 +37,7 @@ const Data = ({ title, button }: Props) => {
         </div>
 
         {pathname.includes('client') && (
-          <button onClick={handleOpenModal} disabled={testimonialState.length === 1}>
+          <button onClick={() => handleOpenModalAddTestimonial(true)} disabled={myTestimonial.length === 1}>
             <i className="fa-solid fa-circle-plus"></i>
             <p>{button}</p>
           </button>
@@ -56,7 +52,9 @@ const Data = ({ title, button }: Props) => {
           <h3>{title}</h3>
         </div>
 
-        <button onClick={handleOpenModal}>
+        <button
+        // onClick={handleOpenModal}
+        >
           <i className="fa-solid fa-circle-plus"></i>
           <p>{button}</p>
         </button>

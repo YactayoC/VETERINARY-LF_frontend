@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { Testimonial } from '@/models';
+import { Testimonials } from '@/models';
 
-const initialState: Testimonial[] = [];
+const initialState: Testimonials = {
+  testimonials: [],
+  myTestimonial: [],
+};
 
 export const testimonialSlice = createSlice({
   name: 'testimonial',
@@ -10,12 +13,37 @@ export const testimonialSlice = createSlice({
 
   reducers: {
     loadTestimonials: (state, action) => {
-      return action.payload;
+      return {
+        ...state,
+        testimonials: action.payload,
+      };
     },
     loadTestimonial: (state, action) => {
-      return [...state, ...action.payload];
+      return {
+        ...state,
+        myTestimonial: action.payload,
+      };
+    },
+    addTestimonial: (state, action) => {
+      return {
+        ...state,
+        myTestimonial: [action.payload],
+      };
+    },
+    updateTestimonial: (state, action) => {
+      return {
+        ...state,
+        myTestimonial: [action.payload],
+      };
+    },
+    removeTestimonial: (state, action) => {
+      return {
+        ...state,
+        myTestimonial: [],
+      };
     },
   },
 });
 
-export const { loadTestimonial, loadTestimonials } = testimonialSlice.actions;
+export const { loadTestimonial, loadTestimonials, addTestimonial, updateTestimonial, removeTestimonial } =
+  testimonialSlice.actions;

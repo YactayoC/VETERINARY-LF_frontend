@@ -2,7 +2,8 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 import { Appointment, Testimonial } from '@/models';
-import { useAppointment, useTestimonial } from '@/hooks';
+import { useAppointment, useModal, useTestimonial } from '@/hooks';
+import { SwalError, SwalSuccess } from '@/utils';
 
 interface Props {
   appointment?: Appointment;
@@ -15,9 +16,18 @@ const Item = ({ appointment, testimonial, type }: Props) => {
 
   if (type === 'appointment') {
     const dateConfig = moment(appointment?.date);
-    const { handleRemoveAppointment } = useAppointment();
+    const { handleRemoveAppointment, handleSetDataActiveAppointment } = useAppointment();
+    const { handleOpenModalUpdateAppointment } = useModal();
 
-    // Todo: Mostrar modal de eliminado y hacer funcion
+    const onDeleteAppointment = async (id: string) => {
+      const { hasError, msg } = await handleRemoveAppointment(id);
+
+      if (hasError) {
+        return SwalError(msg);
+      }
+
+      return SwalSuccess('Appointment deleted', msg);
+    };
 
     return (
       <ul
@@ -37,12 +47,15 @@ const Item = ({ appointment, testimonial, type }: Props) => {
           <i
             className="fa-solid fa-pen element-edit"
             data-id={appointment?._id}
-            // onClick={handleOpenModalAppointment}
+            onClick={() => {
+              handleOpenModalUpdateAppointment(true);
+              handleSetDataActiveAppointment(appointment!);
+            }}
           ></i>
         </li>
 
         <li className="appointment-data__datas-element ">
-          <i className="fa-solid fa-xmark element-remove" onClick={() => handleRemoveAppointment(appointment!._id)}></i>
+          <i className="fa-solid fa-xmark element-remove" onClick={() => onDeleteAppointment(appointment!._id)}></i>
         </li>
       </ul>
     );
@@ -50,21 +63,32 @@ const Item = ({ appointment, testimonial, type }: Props) => {
 
   if (type === 'testimonial') {
     const { handleRemoveTestimonial } = useTestimonial();
+    const { handleOpenModalUpdateTestimonial } = useModal();
     const dateConfig = moment(testimonial?.date);
+
+    const onDeleteTestimonial = async (id: string) => {
+      const { hasError, msg } = await handleRemoveTestimonial(id);
+
+      if (hasError) {
+        return SwalError(msg);
+      }
+
+      SwalSuccess('Testimonial was deleted ', msg);
+    };
 
     return (
       <ul className="testimonial-data__datas-data">
         <li className="appointment-data__datas-element">{testimonial?.testimonial}</li>
         <li className="appointment-data__datas-element">{dateConfig.format('DD-MM-YYYY')}</li>
-        {/* {pathname.includes('dashboard') ? (
-          <li>{client.fullname}</li>
+        {pathname.includes('dashboard') ? (
+          <li>{/* {client.fullname} */}</li>
         ) : (
           <li className="appointment-data__datas-element">
-            <i className="fa-solid fa-pen element-edit" data-id={_id} onClick={handleOpenModalTestimonial}></i>
+            <i className="fa-solid fa-pen element-edit" onClick={() => handleOpenModalUpdateTestimonial(true)}></i>
           </li>
-        )} */}
+        )}
         <li className="appointment-data__datas-element ">
-          <i className="fa-solid fa-xmark element-remove" onClick={() => handleRemoveTestimonial(testimonial!._id)}></i>
+          <i className="fa-solid fa-xmark element-remove" onClick={() => onDeleteTestimonial(testimonial!._id)}></i>
         </li>
       </ul>
     );

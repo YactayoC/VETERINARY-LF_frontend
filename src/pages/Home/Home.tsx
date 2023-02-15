@@ -8,7 +8,7 @@ import { AppStore } from '@/redux/store';
 const arrayTest = [1, 2, 3, 4];
 
 const Home = () => {
-  const testimonialsState = useSelector((state: AppStore) => state.testimonials);
+  const { testimonials } = useSelector((state: AppStore) => state.testimonials);
   const { handleGetTestimonials } = useTestimonial();
 
   useEffect(() => {
@@ -111,9 +111,9 @@ const Home = () => {
       <section className="testimonials__grid animate__animated animate__fadeIn">
         {/* {!status && arrayTest.map(() => <LoaderTestimonial key={crypto.randomUUID()} />)} */}
 
-        {testimonialsState.length > 0 ? (
+        {testimonials.length > 0 ? (
           <>
-            {testimonialsState.map(({ _id, testimonial, client }) => (
+            {testimonials.map(({ _id, testimonial, client }) => (
               <div key={_id} className="testimonial__card">
                 <div className="testimonial__card-text">
                   <i className="fa-solid fa-quote-left testimonial__quote"></i>

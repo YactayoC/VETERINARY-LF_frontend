@@ -5,10 +5,18 @@ import { setLocalStorage, clearLocalStorage } from '@/utils';
 import { Role } from '@/models/role';
 
 const initialState: Auth = {
-  uid: '',
-  fullname: '',
-  role: Role.NONE,
-  token: '',
+  client: {
+    _id: '',
+    fullname: '',
+    phone: '',
+    email: '',
+    password: '',
+    address: '',
+    key: null,
+    confirmed: false,
+    role: Role.NONE,
+  },
+  token: null,
 };
 
 export const authSlice = createSlice({
@@ -18,9 +26,9 @@ export const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       setLocalStorage(LocalStorageTypes.TOKEN, action.payload.token);
-      return action.payload;
+      return { ...state, ...action.payload };
     },
-    register: (state, action) => {
+    register: (state) => {
       return state;
     },
     logout: () => {
@@ -29,7 +37,7 @@ export const authSlice = createSlice({
     },
     revalidateAuth: (state, action) => {
       setLocalStorage(LocalStorageTypes.TOKEN, action.payload.token);
-      return action.payload;
+      return { ...state, ...action.payload };
     },
   },
 });

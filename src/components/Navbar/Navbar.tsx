@@ -6,7 +6,7 @@ import { PrivateRoutesClient, PrivateRoutesEmployee, PublicRoutes } from '@/mode
 import { AppStore } from '@/redux/store';
 
 const Navbar = () => {
-  const { fullname, role, uid } = useSelector((state: AppStore) => state.auth);
+  const { fullname, role, _id } = useSelector((state: AppStore) => state.auth.client);
   const { handleLogout } = useAuth();
 
   const onLogout = () => {
@@ -42,7 +42,7 @@ const Navbar = () => {
             Contact
           </NavLink>
 
-          {uid && fullname ? (
+          {_id && fullname ? (
             <>
               <Link
                 className="nav__link nav__link-user"
@@ -98,7 +98,7 @@ const Navbar = () => {
             Contact
           </NavLink>
 
-          {uid && fullname ? (
+          {_id && fullname ? (
             <>
               <Link
                 className="nav__link nav__link--phone nav__link-user"

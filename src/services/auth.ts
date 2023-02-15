@@ -1,23 +1,31 @@
 import { vetAPI, vetPrivateAPI } from '@/api';
-import { Auth, AuthLogin, AuthRegister } from '@/models';
+import { Auth, AuthLogin, AuthRegister, Client } from '@/models';
 
 interface ResponseRegister {
-  uid: string;
-  fullname: string;
+  msg: string;
+}
+
+interface ResponseAuthUpdate {
+  client: Client;
   msg: string;
 }
 
 export const loginService = async (dataLogin: AuthLogin) => {
-  const { data } = await vetAPI.post<Auth>('auth/login', dataLogin);
+  const { data } = await vetPrivateAPI.post<Auth>('auth/login', dataLogin);
   return data;
 };
 
 export const registerService = async (dataRegister: AuthRegister) => {
-  const { data } = await vetAPI.post<ResponseRegister>('auth/register', dataRegister);
+  const { data } = await vetPrivateAPI.post<ResponseRegister>('auth/register', dataRegister);
   return data;
 };
 
 export const revalidateTokenService = async () => {
   const { data } = await vetPrivateAPI.get<Auth>('auth/revalidate');
+  return data;
+};
+
+export const updateProfileService = async (dataProfile: AuthRegister): Promise<ResponseAuthUpdate> => {
+  const { data } = await vetPrivateAPI.put<ResponseAuthUpdate>('auth/profile', dataProfile);
   return data;
 };

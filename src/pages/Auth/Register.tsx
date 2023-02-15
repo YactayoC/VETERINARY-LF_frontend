@@ -56,7 +56,7 @@ const Register = () => {
         <div className="form__group">
           <input
             className="form__input"
-            type="number"
+            type="text"
             placeholder="Phone"
             autoComplete="off"
             {...register('phone', {
