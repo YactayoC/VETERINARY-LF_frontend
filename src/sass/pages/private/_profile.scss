@@ -75,6 +75,7 @@
   max-width: 14rem;
   max-height: 30rem;
   overflow: auto;
+  row-gap: 2rem;
 
   @include m.phone {
     width: 50rem;

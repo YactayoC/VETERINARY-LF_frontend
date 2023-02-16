@@ -4,23 +4,20 @@ import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 import { PrivateRoutesClient, PrivateRoutesEmployee, PublicRoutes } from '@/models';
 import { AppStore } from '@/redux/store';
+import { useState } from 'react';
 
 const Navbar = () => {
   const { fullname, role, _id } = useSelector((state: AppStore) => state.auth.client);
+  const [activeBarPhone, setActiveBarPhone] = useState(false);
   const { handleLogout } = useAuth();
 
   const onLogout = () => {
     handleLogout();
   };
 
-  const onBarPhone = () => {
-    const navPhone = document.querySelector('.nav');
-    navPhone!.classList.toggle('nav-active--phone');
-  };
-
   return (
     <header>
-      <nav className="nav">
+      <nav className={`nav ${activeBarPhone ? 'nav-active--phone' : ''}`}>
         <Link to="#">
           <img className="nav__logo" src="/assets/ui/logo.png" alt="logo" />
         </Link>
@@ -49,7 +46,7 @@ const Navbar = () => {
                 to={
                   role === 'client'
                     ? `/${PrivateRoutesClient.LINK_APPOINTMENTS}`
-                    : `/${PrivateRoutesEmployee.APPOINTMENTS}`
+                    : `/${PrivateRoutesEmployee.LINK_APPOINTMENTS}`
                 }
               >
                 <i className="fa-solid fa-user nav__link-user--on"></i>
@@ -74,7 +71,7 @@ const Navbar = () => {
         </div>
 
         {/* ===============PHONE==================== */}
-        <div className="nav__bar" onClick={onBarPhone}>
+        <div className="nav__bar" onClick={() => setActiveBarPhone(!activeBarPhone)}>
           <i className="fa-solid fa-bars"></i>
         </div>
 

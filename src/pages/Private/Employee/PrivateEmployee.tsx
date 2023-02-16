@@ -6,7 +6,7 @@ import { PrivateRoutesEmployee } from '@/models';
 
 const Appointment = lazy(() => import('./Appointment/Appointment'));
 const Testimonial = lazy(() => import('./Testimonial/Testimonial'));
-const Employee = lazy(() => import('./Employee/Employee'));
+const Employee = lazy(() => import('./Employees/Employee'));
 const Profile = lazy(() => import('./Profile/Profile'));
 
 const PrivateEmployee = () => {

@@ -14,8 +14,9 @@ import {
   getMyAppointmentsService,
   removeAppointmentService,
   updateAppointmentService,
+  updateAppointmentStateService,
 } from '@/services';
-import { AddAppointment, RequestUpdateAppointment, ResponseUpdateAppointment } from '@/models';
+import { AddAppointment, Appointment, RequestUpdateAppointment, ResponseUpdateAppointment } from '@/models';
 
 export const useAppointment = () => {
   const dispath = useDispatch();
@@ -62,6 +63,16 @@ export const useAppointment = () => {
     }
   };
 
+  const handleUpdateAppointmentState = async (appointment: Appointment) => {
+    try {
+      const data = await updateAppointmentStateService(appointment);
+      dispath(updateAppointment(data.appointment));
+      return { hasError: false, appointment: data.appointment, msg: data.msg };
+    } catch (error) {
+      return { hasError: true, msg: error.response.data.msg };
+    }
+  };
+
   const handleRemoveAppointment = async (id: string) => {
     try {
       const data = await removeAppointmentService(id);
@@ -77,6 +88,7 @@ export const useAppointment = () => {
     handleGetMyAppointments,
     handleAddAppointment,
     handleUpdateAppointment,
+    handleUpdateAppointmentState,
     handleSetDataActiveAppointment,
     handleRemoveAppointment,
   };

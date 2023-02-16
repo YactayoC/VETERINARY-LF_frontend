@@ -4,7 +4,7 @@ import {
   addTestimonial,
   loadTestimonial,
   loadTestimonials,
-  removeTestimonial,
+  removeTestimonialAdmin,
   updateTestimonial,
 } from '@/redux/states';
 import {
@@ -59,7 +59,7 @@ export const useTestimonial = () => {
   const handleRemoveTestimonial = async (id: string) => {
     try {
       const dataTestimonial = await removeTestimonialService(id);
-      dispath(removeTestimonial(id));
+      dispath(removeTestimonialAdmin(id));
       return { hasError: false, msg: dataTestimonial.msg };
     } catch (error) {
       return { hasError: true, msg: error.response.data.msg };

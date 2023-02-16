@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
 import { Aside, Loader } from '@/components';
 import { AuthProfile } from '@/models';
 import { AppStore } from '@/redux/store';
-import { isEmail, isFullname, isPhone } from '@/utils';
+import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
+import { useProfile } from '@/hooks';
 
 const ProfileClientPage = () => {
   const { client: dataUser } = useSelector((state: AppStore) => state.auth);
+  const { handleAuthUpdate } = useProfile();
   const {
     register,
     handleSubmit,
@@ -23,15 +24,19 @@ const ProfileClientPage = () => {
     },
   });
 
-  const onUpdateDataUser = (data: AuthProfile) => {
-    console.log(data);
+  const onUpdateDataUser = async (data: AuthProfile) => {
+    const { hasError, msg, errorMessage } = await handleAuthUpdate(data);
+
+    if (hasError) {
+      return SwalError(errorMessage);
+    }
+
+    SwalSuccess('User was updated', msg!);
   };
 
   if (!dataUser) {
     return <Loader />;
   }
-
-  // TODO: actualizar datos
 
   return (
     <div className="appointment">
@@ -67,6 +72,7 @@ const ProfileClientPage = () => {
                     validate: isFullname,
                   })}
                 />
+                {errors.fullname && <p className="error-input">{errors.fullname.message}</p>}
               </div>
               <div className="form__group form__profile">
                 <input
@@ -79,6 +85,7 @@ const ProfileClientPage = () => {
                     validate: isPhone,
                   })}
                 />
+                {errors.phone && <p className="error-input">{errors.phone.message}</p>}
               </div>
               <div className="form__group form__profile">
                 <input
@@ -91,6 +98,7 @@ const ProfileClientPage = () => {
                     minLength: { value: 6, message: 'The address must be at least 6 characters long' },
                   })}
                 />
+                {errors.address && <p className="error-input">{errors.address.message}</p>}
               </div>
               <div className="form__group form__profile">
                 <input
@@ -101,6 +109,7 @@ const ProfileClientPage = () => {
                   disabled
                   {...register('email', { required: 'This field is required', validate: isEmail })}
                 />
+                {errors.email && <p className="error-input">{errors.email.message}</p>}
               </div>
               <div className="form__group form__profile">
                 <input
@@ -114,6 +123,7 @@ const ProfileClientPage = () => {
                     minLength: { value: 6, message: 'The password must be at least 6 characters long' },
                   })}
                 />
+                {errors.password && <p className="error-input">{errors.password.message}</p>}
               </div>
             </form>
           </div>

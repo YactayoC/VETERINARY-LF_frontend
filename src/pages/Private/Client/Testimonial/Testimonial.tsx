@@ -97,8 +97,12 @@ const TestimonialClientPage = () => {
                   className="form__input form__area"
                   placeholder="Provide a testimonial about our service"
                   autoComplete="off"
-                  {...register('testimonial', { required: 'This field is required' })}
+                  {...register('testimonial', {
+                    required: 'This field is required',
+                    minLength: { value: 10, message: 'The testimonial must be at least 10 characters long' },
+                  })}
                 ></textarea>
+                {errors.testimonial && <p className="error-input">{errors.testimonial.message}</p>}
               </div>
 
               <div className="form__submit form__submit-add">
@@ -128,8 +132,12 @@ const TestimonialClientPage = () => {
                   placeholder="Provide a testimonial about our service"
                   autoComplete="off"
                   defaultValue={myTestimonial[0].testimonial}
-                  {...register('testimonial', { required: 'This field is required' })}
+                  {...register('testimonial', {
+                    required: 'This field is required',
+                    minLength: { value: 10, message: 'The testimonial must be at least 10 characters long' },
+                  })}
                 ></textarea>
+                {errors.testimonial && <p className="error-input">{errors.testimonial.message}</p>}
               </div>
               <div className="form__submit form__submit-add">
                 <button type="submit" className="form__button">

@@ -30,4 +30,8 @@ export interface AuthRegister {
   password: string;
 }
 
+export interface AuthUpdate extends Auth {
+  msg: string;
+}
+
 export interface AuthProfile extends AuthRegister {}

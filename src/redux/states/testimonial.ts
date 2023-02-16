@@ -42,8 +42,20 @@ export const testimonialSlice = createSlice({
         myTestimonial: [],
       };
     },
+    removeTestimonialAdmin: (state, action) => {
+      return {
+        ...state,
+        testimonials: state.testimonials.filter((testimonial) => testimonial._id !== action.payload),
+      };
+    },
   },
 });
 
-export const { loadTestimonial, loadTestimonials, addTestimonial, updateTestimonial, removeTestimonial } =
-  testimonialSlice.actions;
+export const {
+  loadTestimonial,
+  loadTestimonials,
+  addTestimonial,
+  updateTestimonial,
+  removeTestimonial,
+  removeTestimonialAdmin,
+} = testimonialSlice.actions;

@@ -65,7 +65,7 @@ const Aside = () => {
           className={({ isActive }) => 'aside__nav-link ' + (isActive && 'aside__nav-link--active')}
           to={
             pathname.includes('dashboard')
-              ? `/${PrivateRoutesEmployee.PROFILE}`
+              ? `/${PrivateRoutesEmployee.LINK_PROFILE}`
               : `/${PrivateRoutesClient.LINK_PROFILE}`
           }
         >

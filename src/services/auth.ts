@@ -1,5 +1,5 @@
 import { vetAPI, vetPrivateAPI } from '@/api';
-import { Auth, AuthLogin, AuthRegister, Client } from '@/models';
+import { Auth, AuthLogin, AuthRegister, AuthUpdate, Client } from '@/models';
 
 interface ResponseRegister {
   msg: string;
@@ -15,6 +15,11 @@ export const loginService = async (dataLogin: AuthLogin) => {
   return data;
 };
 
+export const loginEmployeeService = async (dataLogin: AuthLogin) => {
+  const { data } = await vetPrivateAPI.post<Auth>('employee/login-employee', dataLogin);
+  return data;
+};
+
 export const registerService = async (dataRegister: AuthRegister) => {
   const { data } = await vetPrivateAPI.post<ResponseRegister>('auth/register', dataRegister);
   return data;
@@ -25,7 +30,7 @@ export const revalidateTokenService = async () => {
   return data;
 };
 
-export const updateProfileService = async (dataProfile: AuthRegister): Promise<ResponseAuthUpdate> => {
-  const { data } = await vetPrivateAPI.put<ResponseAuthUpdate>('auth/profile', dataProfile);
+export const updateProfileService = async (dataProfile: AuthRegister): Promise<AuthUpdate> => {
+  const { data } = await vetPrivateAPI.put<AuthUpdate>('auth/profile', dataProfile);
   return data;
 };

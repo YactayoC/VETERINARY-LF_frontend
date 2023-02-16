@@ -16,7 +16,7 @@ const initialState: Auth = {
     confirmed: false,
     role: Role.NONE,
   },
-  token: null,
+  token: localStorage.getItem(LocalStorageTypes.TOKEN) || '',
 };
 
 export const authSlice = createSlice({
@@ -39,7 +39,10 @@ export const authSlice = createSlice({
       setLocalStorage(LocalStorageTypes.TOKEN, action.payload.token);
       return { ...state, ...action.payload };
     },
+    updateAuth: (state, action) => {
+      return { ...state, ...action.payload };
+    },
   },
 });
 
-export const { login, register, logout, revalidateAuth } = authSlice.actions;
+export const { login, register, logout, revalidateAuth, updateAuth } = authSlice.actions;
