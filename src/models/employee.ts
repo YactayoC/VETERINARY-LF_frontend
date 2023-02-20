@@ -1,17 +1,10 @@
-import { Role } from './role';
+import { User } from './auth';
 
 export interface Employees {
   employees: Employee[];
   activeEmployee: Employee | null;
 }
 
-export interface Employee {
-  _id: string;
-  fullname: string;
-  phone: string;
-  email: string;
-  password: string;
-  address: string;
-  confirmed: boolean;
-  role: Role;
-}
+/* interface extends and omit */
+
+export interface Employee extends Omit<User, 'key | confirmed'> {}

@@ -1,11 +1,52 @@
-import { Aside, Data, Item } from '@/components';
-import { useEmployee } from '@/hooks';
-import { AppStore } from '@/redux/store';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import { Aside, Data, Item } from '@/components';
+import { useEmployee, useModal } from '@/hooks';
+import { AppStore } from '@/redux/store';
+import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
+import { Role, User } from '@/models';
 
 const EmployeeWorkerPage = () => {
   const { employees, activeEmployee } = useSelector((state: AppStore) => state.employees);
-  const { handleGetEmployees } = useEmployee();
+  const { isOpenModalAddEmployee, isOpenModalUpdateEmployee } = useSelector((state: AppStore) => state.modal);
+  const { handleOpenModalAddEmployee, handleOpenModalUpdateEmployee } = useModal();
+  const { handleGetEmployees, handleAddEmployee, handleUpdateEmployee, handleSetDataActiveEmployee } = useEmployee();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<User>();
+
+  useEffect(() => {
+    handleGetEmployees();
+  }, []);
+
+  const onAddEmployee = async (data: User) => {
+    data = { ...data, confirmed: true, role: Role.EMPLOYEE, key: null };
+    const { hasError, msg } = await handleAddEmployee(data);
+
+    if (hasError) {
+      SwalError(msg);
+    }
+
+    SwalSuccess('Employee was added', msg);
+    handleOpenModalAddEmployee(false);
+    reset();
+  };
+
+  const onUpdateEmployee = async (data: User) => {
+    const { hasError, msg } = await handleUpdateEmployee({ ...activeEmployee, ...data });
+    if (hasError) {
+      SwalError(msg);
+    }
+
+    SwalSuccess('Employee was updated', msg);
+    handleOpenModalUpdateEmployee(false);
+    reset();
+  };
 
   return (
     <div className="appointment">
@@ -27,7 +68,7 @@ const EmployeeWorkerPage = () => {
             {employees.length >= 1 ? (
               <>
                 {employees.map((employee) => (
-                  <Item key={employee._id} {...employee} type="employees" />
+                  <Item key={employee._id} employee={employee} type="employees" />
                 ))}
               </>
             ) : (
@@ -37,68 +78,76 @@ const EmployeeWorkerPage = () => {
         </div>
       </div>
 
-      {/* {!activeEmployee ? (
-        <div className="modal modal__hide">
+      {isOpenModalAddEmployee && (
+        <div className={`modal ${!isOpenModalAddEmployee && 'modal__hide'}`}>
           <div className="modal__info">
             <div className="modal__title">
               <h2>Add Employee</h2>
-              <i className="fa-solid fa-rectangle-xmark" onClick={handleCloseModal}></i>
+              <i className="fa-solid fa-rectangle-xmark" onClick={() => handleOpenModalAddEmployee(false)}></i>
             </div>
-            <form className="form animate__animated animate__fadeIn" onSubmit={handleAdd}>
+            <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit(onAddEmployee)}>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="text"
-                  name="fullname"
                   autoComplete="off"
                   placeholder="Fullname"
-                  value={fullname}
-                  onChange={handleInputChange}
+                  {...register('fullname', {
+                    required: 'This field is required',
+                    minLength: { value: 6, message: 'The fullname must be at least 6 characters long' },
+                    validate: isFullname,
+                  })}
                 />
+                {errors.fullname && <p className="error-input">{errors.fullname.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="number"
-                  name="phone"
                   placeholder="Phone"
                   autoComplete="off"
-                  value={phone}
-                  onChange={handleInputChange}
+                  {...register('phone', {
+                    required: 'This field is required',
+                    validate: isPhone,
+                  })}
                 />
+                {errors.phone && <p className="error-input">{errors.phone.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="text"
-                  name="address"
                   placeholder="Address"
                   autoComplete="off"
-                  value={address}
-                  onChange={handleInputChange}
+                  {...register('address', {
+                    required: 'This field is required',
+                    minLength: { value: 6, message: 'The address must be at least 6 characters long' },
+                  })}
                 />
+                {errors.fullname && <p className="error-input">{errors.fullname.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="email"
-                  name="email"
                   placeholder="Email"
                   autoComplete="off"
-                  value={email}
-                  onChange={handleInputChange}
+                  {...register('email', { required: 'This field is required', validate: isEmail })}
                 />
+                {errors.email && <p className="error-input">{errors.email.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="password"
-                  name="password"
                   placeholder="Password"
                   autoComplete="off"
-                  value={password}
-                  onChange={handleInputChange}
+                  {...register('password', {
+                    required: 'This field is required',
+                    minLength: { value: 6, message: 'The password must be at least 6 characters long' },
+                  })}
                 />
+                {errors.password && <p className="error-input">{errors.password.message}</p>}
               </div>
               <div className="form__submit form__submit-add">
                 <button className="form__button">Add</button>
@@ -106,46 +155,64 @@ const EmployeeWorkerPage = () => {
             </form>
           </div>
         </div>
-      ) : (
-        <div className="modal modal__hide">
+      )}
+
+      {activeEmployee && isOpenModalUpdateEmployee && (
+        <div className={`modal ${!isOpenModalUpdateEmployee && 'modal__hide'}`}>
           <div className="modal__info">
             <div className="modal__title">
               <h2>Update Employee</h2>
-              <i className="fa-solid fa-rectangle-xmark" onClick={handleCloseModal}></i>
+              <i
+                className="fa-solid fa-rectangle-xmark"
+                onClick={() => {
+                  handleOpenModalUpdateEmployee(false);
+                  handleSetDataActiveEmployee(null);
+                }}
+              ></i>
             </div>
-            <form className="form animate__animated animate__fadeIn" onSubmit={handleUpdate}>
+            <form className="form animate__animated animate__fadeIn" onSubmit={handleSubmit(onUpdateEmployee)}>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="text"
-                  name="fullname"
                   autoComplete="off"
                   placeholder="Fullname"
-                  value={formValuesUpdate.fullname}
-                  onChange={handleInputChangeUpdate}
+                  defaultValue={activeEmployee.fullname}
+                  {...register('fullname', {
+                    required: 'This field is required',
+                    minLength: { value: 6, message: 'The fullname must be at least 6 characters long' },
+                    validate: isFullname,
+                  })}
                 />
+                {errors.fullname && <p className="error-input">{errors.fullname.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="number"
-                  name="phone"
                   placeholder="Phone"
                   autoComplete="off"
-                  value={formValuesUpdate.phone}
-                  onChange={handleInputChangeUpdate}
+                  defaultValue={activeEmployee?.phone}
+                  {...register('phone', {
+                    required: 'This field is required',
+                    validate: isPhone,
+                  })}
                 />
+                {errors.phone && <p className="error-input">{errors.phone.message}</p>}
               </div>
               <div className="form__group form__add">
                 <input
                   className="form__input"
                   type="text"
-                  name="address"
                   placeholder="Address"
                   autoComplete="off"
-                  value={formValuesUpdate.address}
-                  onChange={handleInputChangeUpdate}
+                  defaultValue={activeEmployee?.address}
+                  {...register('address', {
+                    required: 'This field is required',
+                    minLength: { value: 6, message: 'The address must be at least 6 characters long' },
+                  })}
                 />
+                {errors.address && <p className="error-input">{errors.address.message}</p>}
               </div>
               <div className="form__submit form__submit-add">
                 <button className="form__button">Update</button>
@@ -153,7 +220,7 @@ const EmployeeWorkerPage = () => {
             </form>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

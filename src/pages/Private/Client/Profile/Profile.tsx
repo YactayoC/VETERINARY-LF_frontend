@@ -8,7 +8,7 @@ import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
 import { useProfile } from '@/hooks';
 
 const ProfileClientPage = () => {
-  const { client: dataUser } = useSelector((state: AppStore) => state.auth);
+  const { user } = useSelector((state: AppStore) => state.auth);
   const { handleAuthUpdate } = useProfile();
   const {
     register,
@@ -16,11 +16,11 @@ const ProfileClientPage = () => {
     formState: { errors },
   } = useForm<AuthProfile>({
     defaultValues: {
-      fullname: dataUser.fullname,
-      phone: dataUser.phone,
-      address: dataUser.address,
-      email: dataUser.email,
-      password: dataUser.password,
+      fullname: user.fullname,
+      phone: user.phone,
+      address: user.address,
+      email: user.email,
+      password: user.password,
     },
   });
 
@@ -34,7 +34,7 @@ const ProfileClientPage = () => {
     SwalSuccess('User was updated', msg!);
   };
 
-  if (!dataUser) {
+  if (!user) {
     return <Loader />;
   }
 
@@ -56,7 +56,7 @@ const ProfileClientPage = () => {
         <div className="profile-data__table">
           <div className="profile-data__img">
             <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>{dataUser.fullname}</h3>
+            <h3>{user.fullname}</h3>
           </div>
           <div className="profile-data__form">
             <form className="form-profile animate__animated animate__fadeIn">

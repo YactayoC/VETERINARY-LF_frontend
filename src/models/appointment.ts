@@ -9,7 +9,7 @@ export interface Appointment {
   symptom: string;
   date: Date;
   state: string;
-  client: ClientInAppointment;
+  user: UserInAppointment;
 }
 
 export interface AddAppointment {
@@ -19,7 +19,7 @@ export interface AddAppointment {
   id?: string;
 }
 
-interface ClientInAppointment {
+interface UserInAppointment {
   _id: string;
   fullname: string;
 }

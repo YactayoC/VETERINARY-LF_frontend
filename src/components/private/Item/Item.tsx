@@ -1,14 +1,14 @@
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
-import { Appointment, Employee, Testimonial } from '@/models';
-import { useAppointment, useModal, useTestimonial } from '@/hooks';
+import { Appointment, Testimonial, User } from '@/models';
+import { useAppointment, useEmployee, useModal, useTestimonial } from '@/hooks';
 import { SwalError, SwalSuccess } from '@/utils';
 
 interface Props {
   appointment?: Appointment;
   testimonial?: Testimonial;
-  employee?: Employee;
+  employee?: User;
   type: 'appointment' | 'testimonial' | 'employees';
 }
 
@@ -42,7 +42,7 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
         <li className="appointment-data__datas-element">{dateConfig.format('DD-MM-YYYY HH:mm')}</li>
         <li className="appointment-data__datas-element">{appointment?.mascot}</li>
         {pathname.includes('dashboard') && (
-          <li className="appointment-data__datas-element">{appointment?.client.fullname}</li>
+          <li className="appointment-data__datas-element">{appointment?.user.fullname}</li>
         )}
         <li className="appointment-data__datas-element">{appointment?.state}</li>
 
@@ -84,7 +84,7 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
         <li className="appointment-data__datas-element">{testimonial?.testimonial}</li>
         <li className="appointment-data__datas-element">{dateConfig.format('DD-MM-YYYY')}</li>
         {pathname.includes('dashboard') ? (
-          <li>{testimonial?.client.fullname}</li>
+          <li>{testimonial?.user.fullname}</li>
         ) : (
           <li className="appointment-data__datas-element">
             <i className="fa-solid fa-pen element-edit" onClick={() => handleOpenModalUpdateTestimonial(true)}></i>
@@ -98,8 +98,17 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
   }
 
   if (type === 'employees') {
-    const handleRemove = (id: string) => {
-      console.log('Removiendo empleado de ID', id);
+    const { handleRemoveEmployee, handleSetDataActiveEmployee } = useEmployee();
+    const { handleOpenModalUpdateEmployee } = useModal();
+
+    const handleRemove = async (id: string) => {
+      const { hasError, msg } = await handleRemoveEmployee(id);
+
+      if (hasError) {
+        return SwalError(msg);
+      }
+
+      SwalSuccess('Employee was deleted', msg);
     };
 
     return (
@@ -115,8 +124,13 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
         <li className="appointment-data__datas-element">{employee?.email}</li>
         <li className="appointment-data__datas-element">{employee?.address}</li>
         <li className="appointment-data__datas-element">
-          Modal
-          {/* <i className="fa-solid fa-pen element-edit" onClick={handleOpenModalEmployee}></i> */}
+          <i
+            className="fa-solid fa-pen element-edit"
+            onClick={() => {
+              handleSetDataActiveEmployee(employee!);
+              handleOpenModalUpdateEmployee(true);
+            }}
+          ></i>
         </li>
         <li className="appointment-data__datas-element ">
           <i className="fa-solid fa-xmark element-remove" onClick={() => handleRemove(employee!._id)}></i>

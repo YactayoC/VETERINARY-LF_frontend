@@ -17,6 +17,7 @@ const Contact = lazy(() => import('./pages/Contact/Contact'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const LoginEmployee = lazy(() => import('./pages/Auth/LoginEmployee'));
 const Register = lazy(() => import('./pages/Auth/Register'));
+const Confirm = lazy(() => import('./pages/Auth/Confirm'));
 
 const PrivateEmployee = lazy(() => import('./pages/Private/Employee/PrivateEmployee'));
 const PrivateClient = lazy(() => import('./pages/Private/Client/PrivateClient'));
@@ -31,7 +32,7 @@ function App() {
               <Route path={PublicRoutes.HOME} element={<Home />} />
               <Route path={PublicRoutes.SERVICES} element={<Services />} />
               <Route path={PublicRoutes.CONTACT} element={<Contact />} />
-              <Route path={PublicRoutes.CONFIRM_ACCOUNT} element={<>ConfirmScreen</>} />
+              <Route path={PublicRoutes.CONFIRM_ACCOUNT} element={<Confirm />} />
 
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
               <Route path={PublicRoutes.LOGIN_EMPLOYEE} element={<LoginEmployee />} />

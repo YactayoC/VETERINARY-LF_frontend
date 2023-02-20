@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Aside = () => {
-  const { fullname } = useSelector((state: AppStore) => state.auth.client);
+  const { fullname } = useSelector((state: AppStore) => state.auth.user);
   const { handleLogout } = useAuth();
   const [showNavbarExtended, setShowNavbarExtended] = useState(false);
   const { pathname } = useLocation();

@@ -1,11 +1,11 @@
 import { Role } from './role';
 
 export interface Auth {
-  client: Client;
+  user: User;
   token: string | null;
 }
 
-export interface Client {
+export interface User {
   _id: string;
   fullname: string;
   phone: string;

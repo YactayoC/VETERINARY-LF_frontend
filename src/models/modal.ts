@@ -3,4 +3,6 @@ export interface Modal {
   isOpenModalAddTestimonial: boolean;
   isOpenModalUpdateAppointment: boolean;
   isOpenModalUpdateTestimonial: boolean;
+  isOpenModalAddEmployee: boolean;
+  isOpenModalUpdateEmployee: boolean;
 }

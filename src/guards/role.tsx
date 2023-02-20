@@ -18,7 +18,7 @@ const RoleGuard = ({ role }: Props) => {
     return <Loader />;
   }
 
-  return authState.client.role === role ? <Outlet /> : <Navigate replace to={PublicRoutes.HOME} />;
+  return authState.user.role === role ? <Outlet /> : <Navigate replace to={PublicRoutes.HOME} />;
 };
 
 export default RoleGuard;

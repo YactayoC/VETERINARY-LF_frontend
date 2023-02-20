@@ -1,12 +1,12 @@
-import { vetAPI, vetPrivateAPI } from '@/api';
-import { Auth, AuthLogin, AuthRegister, AuthUpdate, Client } from '@/models';
+import { vetPrivateAPI } from '@/api';
+import { Auth, AuthLogin, AuthRegister, AuthUpdate, User } from '@/models';
 
 interface ResponseRegister {
   msg: string;
 }
 
 interface ResponseAuthUpdate {
-  client: Client;
+  user: User;
   msg: string;
 }
 

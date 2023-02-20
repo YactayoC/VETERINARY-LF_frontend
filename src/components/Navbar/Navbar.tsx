@@ -7,7 +7,7 @@ import { AppStore } from '@/redux/store';
 import { useState } from 'react';
 
 const Navbar = () => {
-  const { fullname, role, _id } = useSelector((state: AppStore) => state.auth.client);
+  const { fullname, role, _id } = useSelector((state: AppStore) => state.auth.user);
   const [activeBarPhone, setActiveBarPhone] = useState(false);
   const { handleLogout } = useAuth();
 

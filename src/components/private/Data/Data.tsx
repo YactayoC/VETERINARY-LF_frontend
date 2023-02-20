@@ -1,5 +1,6 @@
 import { useModal } from '@/hooks';
 import { AppStore } from '@/redux/store';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -9,9 +10,8 @@ interface Props {
 }
 
 const Data = ({ title, button }: Props) => {
-  const { testimonials, myTestimonial } = useSelector((state: AppStore) => state.testimonials);
   const { pathname } = useLocation();
-  const { handleOpenModalAddAppointment, handleOpenModalAddTestimonial } = useModal();
+  const { handleOpenModalAddAppointment, handleOpenModalAddTestimonial, handleOpenModalAddEmployee } = useModal();
 
   if (title === 'Appointments') {
     return (
@@ -28,7 +28,10 @@ const Data = ({ title, button }: Props) => {
         )}
       </div>
     );
-  } else if (title === 'Testimonial') {
+  }
+  if (title === 'Testimonial') {
+    const { myTestimonial } = useSelector((state: AppStore) => state.testimonials);
+
     return (
       <div className="data__general">
         <div>
@@ -44,7 +47,8 @@ const Data = ({ title, button }: Props) => {
         )}
       </div>
     );
-  } else if (title === 'Employees') {
+  }
+  if (title === 'Employees') {
     return (
       <div className="data__general">
         <div>
@@ -53,7 +57,9 @@ const Data = ({ title, button }: Props) => {
         </div>
 
         <button
-        // onClick={handleOpenModal}
+          onClick={() => {
+            handleOpenModalAddEmployee(true);
+          }}
         >
           <i className="fa-solid fa-circle-plus"></i>
           <p>{button}</p>

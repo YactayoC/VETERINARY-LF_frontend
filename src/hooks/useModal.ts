@@ -5,6 +5,8 @@ import {
   setOpenModalUpdateAppointment,
   setOpenModalAddTestimonial,
   setOpenModalUpdateTestimonial,
+  setOpenModalAddEmployee,
+  setOpenModalUpdateEmployee,
 } from '@/redux/states';
 
 export const useModal = () => {
@@ -26,10 +28,20 @@ export const useModal = () => {
     dispatch(setOpenModalUpdateTestimonial(isOpen));
   };
 
+  const handleOpenModalAddEmployee = (isOpen: boolean) => {
+    dispatch(setOpenModalAddEmployee(isOpen));
+  };
+
+  const handleOpenModalUpdateEmployee = (isOpen: boolean) => {
+    dispatch(setOpenModalUpdateEmployee(isOpen));
+  };
+
   return {
     handleOpenModalAddAppointment,
     handleOpenModalUpdateAppointment,
     handleOpenModalAddTestimonial,
     handleOpenModalUpdateTestimonial,
+    handleOpenModalAddEmployee,
+    handleOpenModalUpdateEmployee,
   };
 };

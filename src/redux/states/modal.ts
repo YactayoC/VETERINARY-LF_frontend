@@ -7,6 +7,8 @@ const initialState: Modal = {
   isOpenModalAddTestimonial: false,
   isOpenModalUpdateAppointment: false,
   isOpenModalUpdateTestimonial: false,
+  isOpenModalAddEmployee: false,
+  isOpenModalUpdateEmployee: false,
 };
 
 export const modalSlice = createSlice({
@@ -26,6 +28,12 @@ export const modalSlice = createSlice({
     setOpenModalUpdateTestimonial: (state, action) => {
       return { ...state, isOpenModalUpdateTestimonial: action.payload };
     },
+    setOpenModalAddEmployee: (state, action) => {
+      return { ...state, isOpenModalAddEmployee: action.payload };
+    },
+    setOpenModalUpdateEmployee: (state, action) => {
+      return { ...state, isOpenModalUpdateEmployee: action.payload };
+    },
   },
 });
 
@@ -34,4 +42,6 @@ export const {
   setOpenModalUpdateAppointment,
   setOpenModalAddTestimonial,
   setOpenModalUpdateTestimonial,
+  setOpenModalAddEmployee,
+  setOpenModalUpdateEmployee,
 } = modalSlice.actions;

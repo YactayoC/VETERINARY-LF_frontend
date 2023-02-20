@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { Appointments, Auth, Employees, Modal, Testimonials } from '@/models';
-import { appointmentSlice, authSlice, employeeSlice, loadingSlice, modalSlice, testimonialSlice } from './states';
+import { appointmentSlice, authSlice, employeesSlice, loadingSlice, modalSlice, testimonialSlice } from './states';
 
 export interface AppStore {
   auth: Auth;
@@ -19,6 +19,6 @@ export default configureStore<AppStore>({
     appointments: appointmentSlice.reducer,
     modal: modalSlice.reducer,
     isLoadingAuth: loadingSlice.reducer,
-    employees: employeeSlice.reducer,
+    employees: employeesSlice.reducer,
   },
 });

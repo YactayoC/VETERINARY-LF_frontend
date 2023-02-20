@@ -8,7 +8,7 @@ import { AuthProfile } from '@/models';
 import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
 
 const ProfileWorkerPage = () => {
-  const { client: dataEmployee } = useSelector((state: AppStore) => state.auth);
+  const { user } = useSelector((state: AppStore) => state.auth);
   const { handleAuthUpdate } = useProfile();
   const {
     register,
@@ -16,11 +16,11 @@ const ProfileWorkerPage = () => {
     formState: { errors },
   } = useForm<AuthProfile>({
     defaultValues: {
-      fullname: dataEmployee.fullname,
-      phone: dataEmployee.phone,
-      address: dataEmployee.address,
-      email: dataEmployee.email,
-      password: dataEmployee.password,
+      fullname: user.fullname,
+      phone: user.phone,
+      address: user.address,
+      email: user.email,
+      password: user.password,
     },
   });
 
@@ -52,7 +52,7 @@ const ProfileWorkerPage = () => {
         <div className="profile-data__table">
           <div className="profile-data__img">
             <img src="../assets/ui/user.webp" alt="profile" />
-            <h3>{dataEmployee.fullname}</h3>
+            <h3>{user.fullname}</h3>
           </div>
           <div className="profile-data__form">
             <form className="form-profile animate__animated animate__fadeIn">

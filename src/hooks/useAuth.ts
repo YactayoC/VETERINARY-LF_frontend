@@ -55,5 +55,11 @@ export const useAuth = () => {
     dispatch(logout());
   };
 
-  return { handleLogin, handleLoginEmployee, handleRegister, handleRevalidateAuth, handleLogout };
+  return {
+    handleLogin,
+    handleLoginEmployee,
+    handleRegister,
+    handleRevalidateAuth,
+    handleLogout,
+  };
 };

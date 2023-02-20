@@ -7,10 +7,10 @@ export interface Testimonial {
   _id: string;
   testimonial: string;
   date: string;
-  client: Client;
+  user: User;
 }
 
-interface Client {
+interface User {
   _id: string;
   fullname: string;
 }

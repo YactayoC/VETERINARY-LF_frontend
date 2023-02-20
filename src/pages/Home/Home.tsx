@@ -5,8 +5,6 @@ import { Footer, Hero, Navbar } from '@/components';
 import { useTestimonial } from '@/hooks';
 import { AppStore } from '@/redux/store';
 
-const arrayTest = [1, 2, 3, 4];
-
 const Home = () => {
   const { testimonials } = useSelector((state: AppStore) => state.testimonials);
   const { handleGetTestimonials } = useTestimonial();
@@ -113,7 +111,7 @@ const Home = () => {
 
         {testimonials.length > 0 ? (
           <>
-            {testimonials.map(({ _id, testimonial, client }) => (
+            {testimonials.map(({ _id, testimonial, user }) => (
               <div key={_id} className="testimonial__card">
                 <div className="testimonial__card-text">
                   <i className="fa-solid fa-quote-left testimonial__quote"></i>
@@ -121,7 +119,7 @@ const Home = () => {
                 </div>
                 <div className="testimonial__card-author">
                   <img src="/assets/ui/user.webp" alt="profile" />
-                  <h3>{client.fullname}</h3>
+                  <h3>{user.fullname}</h3>
                 </div>
               </div>
             ))}

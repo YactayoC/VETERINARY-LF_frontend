@@ -5,7 +5,7 @@ import { setLocalStorage, clearLocalStorage } from '@/utils';
 import { Role } from '@/models/role';
 
 const initialState: Auth = {
-  client: {
+  user: {
     _id: '',
     fullname: '',
     phone: '',
