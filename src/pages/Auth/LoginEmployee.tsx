@@ -42,7 +42,6 @@ const LoginEmployee = () => {
             placeholder="Email"
             autoComplete="off"
             {...register('email', { required: 'This field is required', validate: isEmail })}
-            defaultValue="syactayoc@autonoma.edu.pe"
           />
           {errors.email && <p className="error-input">{errors.email.message}</p>}
         </div>

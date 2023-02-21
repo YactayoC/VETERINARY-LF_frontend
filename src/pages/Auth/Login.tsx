@@ -42,7 +42,6 @@ const Login = () => {
             placeholder="Email"
             autoComplete="off"
             {...register('email', { required: 'This field is required', validate: isEmail })}
-            defaultValue="sebastianaronyactayo@gmail.com"
           />
           {errors.email && <p className="error-input">{errors.email.message}</p>}
         </div>
@@ -55,7 +54,6 @@ const Login = () => {
               required: 'This field is required',
               minLength: { value: 6, message: 'Minimum 6 characters' },
             })}
-            defaultValue="sebas2001"
           />
           {errors.password && <p className="error-input">{errors.password.message}</p>}
         </div>
@@ -63,9 +61,9 @@ const Login = () => {
           <button>Login</button>
           <p>
             Don't have an account? <Link to="/auth/register">Sign Up</Link>
+            {/* <br />
             <br />
-            <br />
-            Are you an employee? <Link to="/auth/login-employee">Sign In</Link>
+            Are you an employee? <Link to="/auth/login-employee">Sign In</Link> */}
           </p>
         </div>
       </form>
