@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_BASE_URL2;
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const vetPrivateAPI = axios.create({
   baseURL: baseURL,
