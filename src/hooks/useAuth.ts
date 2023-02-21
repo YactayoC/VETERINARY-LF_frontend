@@ -1,7 +1,13 @@
 import { useDispatch } from 'react-redux';
 
 import { login, logout, register, revalidateAuth } from '@/redux';
-import { loginEmployeeService, loginService, registerService, revalidateTokenService } from '@/services';
+import {
+  confirmService,
+  loginEmployeeService,
+  loginService,
+  registerService,
+  revalidateTokenService,
+} from '@/services';
 import { AuthLogin, AuthRegister } from '@/models';
 import { isLoading } from '@/redux/states';
 
@@ -51,6 +57,15 @@ export const useAuth = () => {
     }
   };
 
+  const handleConfirmAuth = async (token: string) => {
+    try {
+      const dataAuth = await confirmService(token);
+      return { hasError: false, msg: dataAuth.msg };
+    } catch (error) {
+      return { hasError: true, msg: error.response.data.msg };
+    }
+  };
+
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -60,6 +75,7 @@ export const useAuth = () => {
     handleLoginEmployee,
     handleRegister,
     handleRevalidateAuth,
+    handleConfirmAuth,
     handleLogout,
   };
 };

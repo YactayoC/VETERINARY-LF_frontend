@@ -5,9 +5,9 @@ interface ResponseRegister {
   msg: string;
 }
 
-interface ResponseAuthUpdate {
-  user: User;
+interface ResponseConfirm {
   msg: string;
+  confirm: boolean;
 }
 
 export const loginService = async (dataLogin: AuthLogin) => {
@@ -32,5 +32,10 @@ export const revalidateTokenService = async () => {
 
 export const updateProfileService = async (dataProfile: AuthRegister): Promise<AuthUpdate> => {
   const { data } = await vetPrivateAPI.put<AuthUpdate>('auth/profile', dataProfile);
+  return data;
+};
+
+export const confirmService = async (token: string): Promise<ResponseConfirm> => {
+  const { data } = await vetPrivateAPI.get<ResponseConfirm>(`auth/confirm/${token}`);
   return data;
 };
