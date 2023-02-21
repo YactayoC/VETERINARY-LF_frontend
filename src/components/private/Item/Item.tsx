@@ -1,14 +1,16 @@
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
-import { Appointment, Testimonial, User } from '@/models';
+import { Appointment, Employee, Testimonial, User } from '@/models';
 import { useAppointment, useEmployee, useModal, useTestimonial } from '@/hooks';
 import { SwalError, SwalSuccess } from '@/utils';
+import { useSelector } from 'react-redux';
+import { AppStore } from '@/redux/store';
 
 interface Props {
   appointment?: Appointment;
   testimonial?: Testimonial;
-  employee?: User;
+  employee?: Employee;
   type: 'appointment' | 'testimonial' | 'employees';
 }
 
@@ -98,6 +100,7 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
   }
 
   if (type === 'employees') {
+    const stateEMployee = useSelector((state: AppStore) => state.employees);
     const { handleRemoveEmployee, handleSetDataActiveEmployee } = useEmployee();
     const { handleOpenModalUpdateEmployee } = useModal();
 
@@ -127,8 +130,8 @@ const Item = ({ appointment, testimonial, employee, type }: Props) => {
           <i
             className="fa-solid fa-pen element-edit"
             onClick={() => {
-              handleSetDataActiveEmployee(employee!);
               handleOpenModalUpdateEmployee(true);
+              handleSetDataActiveEmployee(employee!);
             }}
           ></i>
         </li>

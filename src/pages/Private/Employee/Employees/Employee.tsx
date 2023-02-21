@@ -8,6 +8,8 @@ import { AppStore } from '@/redux/store';
 import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
 import { Role, User } from '@/models';
 
+interface AddEmployee extends User {}
+
 const EmployeeWorkerPage = () => {
   const { employees, activeEmployee } = useSelector((state: AppStore) => state.employees);
   const { isOpenModalAddEmployee, isOpenModalUpdateEmployee } = useSelector((state: AppStore) => state.modal);
@@ -18,13 +20,17 @@ const EmployeeWorkerPage = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<User>();
+  } = useForm<AddEmployee>();
 
   useEffect(() => {
     handleGetEmployees();
   }, []);
 
-  const onAddEmployee = async (data: User) => {
+  useEffect(() => {
+    reset();
+  }, [activeEmployee]);
+
+  const onAddEmployee = async (data: AddEmployee) => {
     data = { ...data, confirmed: true, role: Role.EMPLOYEE, key: null };
     const { hasError, msg } = await handleAddEmployee(data);
 
@@ -37,7 +43,7 @@ const EmployeeWorkerPage = () => {
     reset();
   };
 
-  const onUpdateEmployee = async (data: User) => {
+  const onUpdateEmployee = async (data: AddEmployee) => {
     const { hasError, msg } = await handleUpdateEmployee({ ...activeEmployee, ...data });
     if (hasError) {
       SwalError(msg);
@@ -65,7 +71,7 @@ const EmployeeWorkerPage = () => {
               <li className="appointment-data__datas-element">Edit</li>
               <li className="appointment-data__datas-element">Remove</li>
             </ul>
-            {employees.length >= 1 ? (
+            {employees.length >= 0 ? (
               <>
                 {employees.map((employee) => (
                   <Item key={employee._id} employee={employee} type="employees" />
@@ -92,6 +98,7 @@ const EmployeeWorkerPage = () => {
                   type="text"
                   autoComplete="off"
                   placeholder="Fullname"
+                  defaultValue={''}
                   {...register('fullname', {
                     required: 'This field is required',
                     minLength: { value: 6, message: 'The fullname must be at least 6 characters long' },
@@ -106,6 +113,7 @@ const EmployeeWorkerPage = () => {
                   type="number"
                   placeholder="Phone"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('phone', {
                     required: 'This field is required',
                     validate: isPhone,
@@ -119,6 +127,7 @@ const EmployeeWorkerPage = () => {
                   type="text"
                   placeholder="Address"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('address', {
                     required: 'This field is required',
                     minLength: { value: 6, message: 'The address must be at least 6 characters long' },
@@ -132,6 +141,7 @@ const EmployeeWorkerPage = () => {
                   type="email"
                   placeholder="Email"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('email', { required: 'This field is required', validate: isEmail })}
                 />
                 {errors.email && <p className="error-input">{errors.email.message}</p>}
@@ -142,6 +152,7 @@ const EmployeeWorkerPage = () => {
                   type="password"
                   placeholder="Password"
                   autoComplete="off"
+                  defaultValue={''}
                   {...register('password', {
                     required: 'This field is required',
                     minLength: { value: 6, message: 'The password must be at least 6 characters long' },
@@ -157,7 +168,7 @@ const EmployeeWorkerPage = () => {
         </div>
       )}
 
-      {activeEmployee && isOpenModalUpdateEmployee && (
+      {isOpenModalUpdateEmployee && (
         <div className={`modal ${!isOpenModalUpdateEmployee && 'modal__hide'}`}>
           <div className="modal__info">
             <div className="modal__title">
@@ -177,7 +188,7 @@ const EmployeeWorkerPage = () => {
                   type="text"
                   autoComplete="off"
                   placeholder="Fullname"
-                  defaultValue={activeEmployee.fullname}
+                  defaultValue={activeEmployee?.fullname}
                   {...register('fullname', {
                     required: 'This field is required',
                     minLength: { value: 6, message: 'The fullname must be at least 6 characters long' },

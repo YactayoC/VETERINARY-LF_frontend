@@ -15,9 +15,6 @@ export const employeesSlice = createSlice({
     loadEmployees(state, action) {
       return { ...state, employees: action.payload };
     },
-    activeEmployee(state, action) {
-      return { ...state, activeEmployee: action.payload };
-    },
     addEmployee(state, action) {
       return { ...state, employees: [...state.employees, action.payload] };
     },
@@ -36,5 +33,5 @@ export const employeesSlice = createSlice({
   },
 });
 
-export const { loadEmployees, activeEmployee, addEmployee, updateEmployee, setDataActiveEmployee, removeEmployee } =
+export const { loadEmployees, addEmployee, updateEmployee, setDataActiveEmployee, removeEmployee } =
   employeesSlice.actions;

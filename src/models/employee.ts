@@ -7,4 +7,4 @@ export interface Employees {
 
 /* interface extends and omit */
 
-export interface Employee extends Omit<User, 'key | confirmed'> {}
+export interface Employee extends User {}

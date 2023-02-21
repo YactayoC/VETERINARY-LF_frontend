@@ -1,15 +1,8 @@
 import { useDispatch } from 'react-redux';
 
 import { addEmployeeService, getEmployeeService, removeEmployeeService, updateEmployeeService } from '@/services';
-import {
-  addEmployee,
-  isLoading,
-  loadEmployees,
-  removeEmployee,
-  setDataActiveEmployee,
-  updateEmployee,
-} from '@/redux/states';
-import { User } from '@/models';
+import { addEmployee, loadEmployees, removeEmployee, setDataActiveEmployee, updateEmployee } from '@/redux/states';
+import { Employee, User } from '@/models';
 
 export const useEmployee = () => {
   const dispatch = useDispatch();
@@ -20,8 +13,7 @@ export const useEmployee = () => {
       dispatch(loadEmployees(dataUsers.users));
       return { hasError: false, data: dataUsers };
     } catch (error) {
-      dispatch(isLoading(false));
-      return { hasError: true, errorMessage: error.response.data.msg };
+      return { hasError: true, msg: error.response.data.msg };
     }
   };
 
@@ -55,8 +47,8 @@ export const useEmployee = () => {
     }
   };
 
-  const handleSetDataActiveEmployee = (employee: User | null) => {
-    dispatch(setDataActiveEmployee(employee));
+  const handleSetDataActiveEmployee = (dataActiveEmployee: Employee | null) => {
+    dispatch(setDataActiveEmployee(dataActiveEmployee));
   };
 
   return {
