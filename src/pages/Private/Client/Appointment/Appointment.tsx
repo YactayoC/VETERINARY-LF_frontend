@@ -14,6 +14,7 @@ interface AddAppointment {
 }
 
 const AppointmentClientPage = () => {
+  document.title = 'LoyalFriend | Appointment';
   const { appointments, activeAppointment } = useSelector((state: AppStore) => state.appointments);
   const { isOpenModalAddAppointment, isOpenModalUpdateAppointment } = useSelector((state: AppStore) => state.modal);
   const { handleOpenModalAddAppointment, handleOpenModalUpdateAppointment } = useModal();

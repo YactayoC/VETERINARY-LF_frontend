@@ -8,6 +8,7 @@ import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
 import { useProfile } from '@/hooks';
 
 const ProfileClientPage = () => {
+  document.title = 'LoyalFriend | Profile';
   const { user } = useSelector((state: AppStore) => state.auth);
   const { handleAuthUpdate } = useProfile();
   const {

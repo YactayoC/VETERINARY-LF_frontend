@@ -11,6 +11,7 @@ interface AddTestimonial {
 }
 
 const TestimonialClientPage = () => {
+  document.title = 'LoyalFriend | Testimonial';
   const { myTestimonial } = useSelector((state: AppStore) => state.testimonials);
   const { isOpenModalAddTestimonial, isOpenModalUpdateTestimonial } = useSelector((state: AppStore) => state.modal);
   const { handleGetMyTestimonial, handleAddTestimonial, handleUpddateTestimonial } = useTestimonial();

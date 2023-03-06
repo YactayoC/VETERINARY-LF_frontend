@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 export const Confirm = () => {
+  document.title = 'LoyalFriend | Confirm Account';
   const { handleConfirmAuth } = useAuth();
   const [messageConfirmAuth, setMessageConfirmAuth] = useState('');
   const [isConfirmAuth, setIsConfirmAuth] = useState(false);

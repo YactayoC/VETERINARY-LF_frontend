@@ -6,6 +6,7 @@ import { AuthLogin, PublicRoutes } from '@/models';
 import { isEmail, SwalError } from '@/utils';
 
 const Login = () => {
+  document.title = 'LoyalFriend | Login';
   const { handleLogin } = useAuth();
   const navigate = useNavigate();
   const {

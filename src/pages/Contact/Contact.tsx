@@ -14,6 +14,7 @@ type ContactData = {
 };
 
 const Contact = () => {
+  document.title = 'LoyalFriend | Contact';
   const [inputChecked, setInputChecked] = useState(false);
   const {
     register,

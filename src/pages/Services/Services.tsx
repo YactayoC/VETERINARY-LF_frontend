@@ -1,6 +1,8 @@
 import { Footer, Hero, Navbar } from '@/components';
 
 const Services = () => {
+  document.title = 'LoyalFriend | Services';
+
   return (
     <>
       <Navbar />

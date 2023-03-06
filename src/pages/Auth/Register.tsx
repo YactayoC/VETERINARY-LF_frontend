@@ -6,6 +6,7 @@ import { isEmail, isFullname, isPhone, SwalError, SwalSuccess } from '@/utils';
 import { AuthRegister, PublicRoutes } from '@/models';
 
 const Register = () => {
+  document.title = 'LoyalFriend | Register';
   const { handleRegister } = useAuth();
   const navigate = useNavigate();
   const {

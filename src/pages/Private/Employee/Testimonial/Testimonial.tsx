@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const TestimonialWorkerPage = () => {
+  document.title = 'LoyalFriend | Testimonial';
   const { testimonials } = useSelector((state: AppStore) => state.testimonials);
   const { handleGetTestimonials } = useTestimonial();
 

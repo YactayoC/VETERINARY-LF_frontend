@@ -100,7 +100,9 @@ const Navbar = () => {
               <Link
                 className="nav__link nav__link--phone nav__link-user"
                 to={
-                  role === 'client' ? `/${PrivateRoutesClient.APPOINTMENTS}` : `/${PrivateRoutesEmployee.APPOINTMENTS}`
+                  role === 'client'
+                    ? `/${PrivateRoutesClient.LINK_APPOINTMENTS}`
+                    : `/${PrivateRoutesEmployee.LINK_APPOINTMENTS}`
                 }
               >
                 <i className="fa-solid fa-user nav__link-user--on"></i>

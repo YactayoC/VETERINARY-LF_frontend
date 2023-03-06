@@ -11,6 +11,7 @@ interface UpdateAppointmentAdmin {
 }
 
 const AppointmentWorkerPage = () => {
+  document.title = 'LoyalFriend | Appointment';
   const { appointments, activeAppointment } = useSelector((store: AppStore) => store.appointments);
   const { isOpenModalUpdateAppointment } = useSelector((store: AppStore) => store.modal);
   const { handleGetAppointments, handleUpdateAppointmentState } = useAppointment();

@@ -8,6 +8,7 @@ import { AppStore } from '@/redux/store';
 const Home = () => {
   const { testimonials } = useSelector((state: AppStore) => state.testimonials);
   const { handleGetTestimonials } = useTestimonial();
+  document.title = 'LoyalFriend | Home';
 
   useEffect(() => {
     handleGetTestimonials();

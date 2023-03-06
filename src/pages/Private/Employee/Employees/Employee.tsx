@@ -11,6 +11,7 @@ import { Role, User } from '@/models';
 interface AddEmployee extends User {}
 
 const EmployeeWorkerPage = () => {
+  document.title = 'LoyalFriend | Employees';
   const { employees, activeEmployee } = useSelector((state: AppStore) => state.employees);
   const { isOpenModalAddEmployee, isOpenModalUpdateEmployee } = useSelector((state: AppStore) => state.modal);
   const { handleOpenModalAddEmployee, handleOpenModalUpdateEmployee } = useModal();
